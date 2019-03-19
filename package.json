@@ -1,0 +1,22 @@
+{
+  "name": "dubai-pi-ble-iota",
+  "version": "1.0.0",
+  "description": "dev repo for dubai raspberry pi m2m server implementing iota, webservice and and bluetooth low energy emitter",
+  "main": "bleserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkitaIOTA/dubai-pi-ble-iota.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AkitaIOTA/dubai-pi-ble-iota/issues"
+  },
+  "homepage": "https://github.com/AkitaIOTA/dubai-pi-ble-iota#readme",
+  "dependencies": {
+    "bleno": "^0.5.0"
+  }
+}
