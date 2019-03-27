@@ -1,5 +1,5 @@
 {
-    "mode": "device_car",
+    "mode": "device_parking",
     "frontend_port": 1337,
     "device_car": {
         "ble_name": "AKITA M2M IOTA CAR",
