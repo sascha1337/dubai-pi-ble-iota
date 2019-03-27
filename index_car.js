@@ -1,7 +1,6 @@
 var config = require("./config_car.json");
-var webservice = require("./webservice");
 
-var bleserver = require("./bleserver");
+var webservice = require("./webservice");
 var blescanner = require("./blescanner");
 
 blescanner.init();
