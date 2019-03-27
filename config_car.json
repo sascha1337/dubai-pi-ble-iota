@@ -1,0 +1,7 @@
+{
+    "mode": "device_car",
+    "frontend_port": 1337,
+    "ble_name": "AKITA M2M IOTA CAR",
+    "ble_uuid": "1337dd542257441fb23bfb071ea45c82",
+    "iota_wallet_seed": "SPWYYQ9FMNIPBEGIXYAIYTDNLKOVQKNFNLUHUPNRMQLUCDRZXMANACKWAKKMYTGWRDSYK9YUTAQTMYBXZ"
+}

@@ -1,0 +1,7 @@
+{
+    "mode": "device_parking",
+    "frontend_port": 1337,
+    "ble_name": "AKITA M2M IOTA CHARGING",
+    "ble_uuid": "13373eed5bb3489e81ac6d052d8cf93b",
+    "iota_wallet_seed": "OJBNQMRJLCOJEFTPPPCZMOXDVMPLHNDOLHWDXMNIAQMFFXY9EIVEHPPIRKNKTOPMYQWWIFJZHUPDQZZKS"
+}
