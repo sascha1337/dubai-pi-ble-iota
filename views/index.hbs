@@ -13,9 +13,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <h2>AKITA M2M DEMO</h2>
+          {{!-- <h2>AKITA M2M DEMO</h2> --}}
           {{!-- <h4>{</h4> --}}
-          <hr>
           <div class="logger">
             <ul class="list-group">
               <li class="list-group-item"><b>Device:</b> {{ device.ble_name }}</li>
@@ -27,8 +26,14 @@
           </div>
         </div>
         <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item"><b>IOTA Balance:</b> 1.000.000 iOTA</li>
+            <li class="list-group-item"><b>in USD: </b> 0.301 USD</li>
+            <li class="list-group-item"><b>in AED: </b> 1.105 AED</li>
+        </div>
+        <div class="col-md-12">
 
-          <canvas id="chart" width="400" height="150"></canvas>
+          <canvas id="chart" width="600" height="200"></canvas>
         </div>
 
         {{!-- <h3>Device: {{ device.ble_name }}</h3> --}}
