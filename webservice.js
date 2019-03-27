@@ -104,6 +104,6 @@ iota.api.getNodeInfo(function(error, success) {
         console.error(error);
     } else {
         // console.log(success)
-        console.log("iota connection established");
+        console.log("::IOTA::","node connected");
     }
 });

@@ -3,5 +3,7 @@
     "frontend_port": 1337,
     "ble_name": "AKITA PiStation Parking",
     "ble_uuid": "13373eed5bb3489e81ac6d052d8cf93b",
-    "iota_wallet_seed": "OJBNQMRJLCOJEFTPPPCZMOXDVMPLHNDOLHWDXMNIAQMFFXY9EIVEHPPIRKNKTOPMYQWWIFJZHUPDQZZKS"
+    "iota_wallet_seed": "OJBNQMRJLCOJEFTPPPCZMOXDVMPLHNDOLHWDXMNIAQMFFXY9EIVEHPPIRKNKTOPMYQWWIFJZHUPDQZZKS",
+    "parking_rssi_start": -50,
+    "parking_rssi_end": -50
 }

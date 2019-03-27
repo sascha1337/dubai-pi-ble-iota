@@ -4,6 +4,8 @@ var device_parking = require("./config_parking.json");
 var noble = require('noble');
 var moment = require("moment");
 
+var socket_ctrl = require("./socket_controller");
+
 var scanningTimeout = 1000; // one second
 var scanningRepeat = scanningTimeout; // Repeat scanning after 10 seconds for new peripherals.
 
@@ -18,7 +20,6 @@ var currentStatusThree = "";
 
 var parkingSeconds;
 var intervalOne;
-
 
 var now ;//= moment(new Date()); //todays date
 var end; // = moment(new Date()); // another date
@@ -63,16 +64,20 @@ function init(){
         var serviceData = advertisement.serviceData;
         var serviceUuids = advertisement.serviceUuids;
         
-        if(localName) console.log("::BLE::", localName, "->", peripheral.rssi);
         
         if(localName == device_parking.ble_name) {
-      
+          
+          console.log("::BLE::", localName, "->", peripheral.rssi);
+          
+          socket_ctrl.broadcast_status("::BLE::", localName, "visible")
+          socket_ctrl.broadcast_rssi(peripheral.rssi)
+          
           var rssi = peripheral.rssi;
           var conn = peripheral.state;
       
           // process.stdout.write("# " + rssi + " ");
           
-          if(conn === "disconnected" && !isParking && rssi > -20) {
+          if(conn === "disconnected" && !isParking && rssi > -5) {
             parkingSeconds = 0;
       
             isParking = true;

@@ -14,8 +14,19 @@
       <div class="row">
         <div class="col-md-12">
         <h2>AKITA M2M DEMO</h2>
-        <h3>Device: {{ device.ble_name }}</h3>
+        <h4>{</h4>
         <hr>
+        <div class="log">
+          <ul class="list-group">
+            <li class="list-group-item"><b>Device:</b> {{ device.ble_name }}</li>
+            <li class="list-group-item"><b>RSSI Log:</b><div class="rssi"></div></li>
+            <li class="list-group-item"><b>Debug Log:</b><div class="debug"></div></li>
+            <li class="list-group-item"><b>Status:</b><div class="status"></div></li>
+            
+          </ul>
+        </div>
+        {{!-- <h3>Device: {{ device.ble_name }}</h3> --}}
+        {{!-- <hr> --}}
         </div>
       </div>
     </div>
