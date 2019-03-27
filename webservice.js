@@ -31,7 +31,7 @@ function getDeviceInfo(){
 }
 
 function getDashboard(ctx){
-    return render('index.hbs', {device:{abc:123}}});
+    return render('index.hbs', {device:{abc:123}});
 }
 
 function testBroadcastIo(ctx){
