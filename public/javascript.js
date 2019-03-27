@@ -45,17 +45,19 @@ var data = {
   labels: [0],
   datasets: [{
     data: [0],
-    yAxes: [{
-        ticks: {
-            beginAtZero: true
-        }
-    }],
     label: 'RSSI',
     backgroundColor: '#ff6600'
   }]
 }
 
-var optionsAnimations = { animation: false }
+var optionsAnimations = { 
+    animation: false,
+    yAxes: [{
+        ticks: {
+            beginAtZero: true
+        }
+    }]
+}
 
 var chart = new Chart(ctx, {
   type: 'line',
