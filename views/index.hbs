@@ -12,20 +12,24 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-        <h2>AKITA M2M DEMO</h2>
-        {{!-- <h4>{</h4> --}}
-        <hr>
-        <div class="logger">
-          <ul class="list-group">
-            <li class="list-group-item"><b>Device:</b> {{ device.ble_name }}</li>
-            <li class="list-group-item"><b>RSSI Log:</b><div class="rssi"></div></li>
-            <li class="list-group-item"><b>Debug Log:</b><div class="log"></div></li>
-            <li class="list-group-item"><b>Status:</b><div class="status"></div></li>
-            
-          </ul>
+        <div class="col-md-6">
+          <h2>AKITA M2M DEMO</h2>
+          {{!-- <h4>{</h4> --}}
+          <hr>
+          <div class="logger">
+            <ul class="list-group">
+              <li class="list-group-item"><b>Device:</b> {{ device.ble_name }}</li>
+              <li class="list-group-item"><b>RSSI Log:</b><div class="rssi"></div></li>
+              <li class="list-group-item"><b>Debug Log:</b><div class="log"></div></li>
+              <li class="list-group-item"><b>Status:</b><div class="status"></div></li>
+              
+            </ul>
+          </div>
         </div>
-        <canvas id="chart" width="400" height="150"></canvas>
+        <div class="col-md-6">
+
+          <canvas id="chart" width="400" height="150"></canvas>
+        </div>
 
         {{!-- <h3>Device: {{ device.ble_name }}</h3> --}}
         {{!-- <hr> --}}
