@@ -1,5 +1,7 @@
+var device = require("./config_car.json");
+var device_parking = require("./config_parking.json");
+
 var noble = require('noble');
-var config = require("./config");
 var moment = require("moment");
 
 var scanningTimeout = 1000; // one second
@@ -60,7 +62,7 @@ function init(){
         var serviceData = advertisement.serviceData;
         var serviceUuids = advertisement.serviceUuids;
         
-        if(localName == config.fullConfig.device_parking.ble_name) {
+        if(localName == device_parking.ble_name) {
       
           var rssi = peripheral.rssi;
           var conn = peripheral.state;

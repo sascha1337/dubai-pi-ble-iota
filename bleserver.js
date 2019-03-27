@@ -1,19 +1,22 @@
 var bleno = require('bleno');
-var device = require("./config").device;
+var device = require("./config_parking.json");
 
 function init(){
+        
 
     console.log("--------AKITA M2M --------");
     console.log(device);
     console.log("--------------------------");
     
     bleno.on('stateChange', function(state) {
+
         console.log('::BLE:: new state: ' + state);
         if (state === 'poweredOn') {
           bleno.startAdvertising(device.ble_name, [device.ble_uuid]);
         } else {
           bleno.stopAdvertising();
         }
+
     });
       
     bleno.on('advertisingStart', function(error) {

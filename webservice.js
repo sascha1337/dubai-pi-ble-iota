@@ -2,7 +2,7 @@ const IOTA = require("iota.lib.js");
 const server = require('server');
 
 const socket_ctrl = require("./socket_controller");
-const device = require("./config");
+// const device = require("./config");
 
 // Communication channel with ESP32
 const { get, post, error, socket } = server.router;
@@ -31,7 +31,7 @@ function getDeviceInfo(){
 }
 
 function getDashboard(ctx){
-    return render('index.hbs', {device:device});
+    return render('index.hbs', {device:{abc:123}}});
 }
 
 function testBroadcastIo(ctx){
