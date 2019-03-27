@@ -45,6 +45,11 @@ var data = {
   labels: [0],
   datasets: [{
     data: [0],
+    yAxes: [{
+        ticks: {
+            beginAtZero: true
+        }
+    }],
     label: 'RSSI',
     backgroundColor: '#ff6600'
   }]
