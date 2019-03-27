@@ -3,34 +3,34 @@
 var socket = io();
 
 // When we receive a message
-socket.on('message', function (data) {
-    console.log(data);
+socket.on('message', function (msg) {
+    console.log(msg);
 });
 
-socket.on('log', function (data) {
-    $('.log').append("<br>" + data);
-    console.log(data);
+socket.on('log', function (msg) {
+    $('.log').append("<br>" + msg);
+    console.log(msg);
 })
 
-socket.on('rssi', function (data) {
-    $('.rssi').empty().append(data);
-    console.log(data);
+socket.on('rssi', function (rssi) {
+    $('.rssi').empty().append(rssi);
+    console.log(rssi);
 
     var length = data.labels.length
     if (length >= 20) {
       data.datasets[0].data.shift()
       data.labels.shift()
     }
-    
+
     data.labels.push(moment().format('HH:mm:ss'))
-    data.datasets[0].data.push(value)
+    data.datasets[0].data.push(rssi)
     chart.update()
   
 })
 
-socket.on('status', function (data) {
-    $('.status').empty().append(data);
-    console.log(data);
+socket.on('status', function (msg) {
+    $('.status').empty().append(msg);
+    console.log(msg);
 })
 
 $(function(){
