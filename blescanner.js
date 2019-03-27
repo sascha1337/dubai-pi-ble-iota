@@ -69,7 +69,7 @@ function init(){
           
           // console.log("::BLE::", localName, "->", peripheral.rssi);
           
-          socket_ctrl.broadcast_status("::BLE::" + " " localName + " visible")
+          socket_ctrl.broadcast_status("::BLE::" + " " + localName + " visible")
           socket_ctrl.broadcast_rssi(peripheral.rssi)
           
           var rssi = peripheral.rssi;
