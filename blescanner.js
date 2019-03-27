@@ -33,16 +33,17 @@ function init(){
 
     noble.on('stateChange', function(state) {
         if (state === 'poweredOn') {
+          console.log("::BLE::","poweredOn")
           noble.startScanning();
         } else {  
-        noble.stopScanning();
+          console.log("::BLE::","stoppedScan")
+          noble.stopScanning();
         }
       })
       
       
       // Checking, Scanning, stopping repeatedly
       setInterval( function(){
-      
         if(noble.state==='poweredOn') {
             noble.startScanning();
             // console.log('Starting Scan...');
@@ -61,6 +62,8 @@ function init(){
         var manufacturerData = advertisement.manufacturerData;
         var serviceData = advertisement.serviceData;
         var serviceUuids = advertisement.serviceUuids;
+        
+        if(localName) console.log("::BLE::", localName, "->", peripheral.rssi);
         
         if(localName == device_parking.ble_name) {
       
