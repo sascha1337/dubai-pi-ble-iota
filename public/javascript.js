@@ -14,7 +14,7 @@ socket.on('log', function (msg) {
 
 socket.on('rssi', function (rssi) {
     $('.rssi').empty().append(rssi);
-    console.log(rssi);
+    // console.log(rssi);
 
     var length = data.labels.length
     if (length >= 20) {
@@ -30,11 +30,11 @@ socket.on('rssi', function (rssi) {
 
 socket.on('status', function (msg) {
     $('.status').empty().append(msg);
-    console.log(msg);
+    // console.log(msg);
 })
 
 $(function(){
-    $.get("http://localhost:3000/device", function(data){
+    $.get("https://api.thetangle.org/market/prices", function(data){
         console.log(data);
     });
 });
