@@ -67,7 +67,7 @@ function init(){
         
         if(localName == device_parking.ble_name) {
           
-          console.log("::BLE::", localName, "->", peripheral.rssi);
+          // console.log("::BLE::", localName, "->", peripheral.rssi);
           
           socket_ctrl.broadcast_status("::BLE::", localName, "visible")
           socket_ctrl.broadcast_rssi(peripheral.rssi)
