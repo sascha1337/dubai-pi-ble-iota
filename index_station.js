@@ -1,5 +1,5 @@
 var config = require("./config_parking.json");
-process.env['BLENO_DEVICE_NAME'] = env.ble_name;
+process.env['BLENO_DEVICE_NAME'] = config.ble_name;
 
 var webservice = require("./webservice");
 var bleserver = require("./bleserver");
