@@ -52,11 +52,13 @@ var data = {
 
 var optionsAnimations = { 
     animation: false,
-    yAxes: [{
-        ticks: {
-            beginAtZero: true
-        }
-    }]
+    scales:{
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    }
 }
 
 var chart = new Chart(ctx, {
