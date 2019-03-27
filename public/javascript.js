@@ -13,7 +13,7 @@ socket.on('log', function (data) {
 })
 
 socket.on('rssi', function (data) {
-    $('.log').empty().append(data);
+    $('.rssi').empty().append(data);
     console.log(data);
 })
 
