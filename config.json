@@ -1,0 +1,19 @@
+{
+    "mode": "device_car",
+    "frontend_port": 1337,
+    "device_car": {
+        "ble_name": "AKITA M2M IOTA CAR",
+        "ble_uuid": "1337dd542257441fb23bfb071ea45c82",
+        "iota_wallet_seed": "SPWYYQ9FMNIPBEGIXYAIYTDNLKOVQKNFNLUHUPNRMQLUCDRZXMANACKWAKKMYTGWRDSYK9YUTAQTMYBXZ"
+    },
+    "device_parking": {
+        "ble_name": "AKITA M2M IOTA CHARGING",
+        "ble_uuid": "06353eed5bb3489e81ac6d052d8cf93b",
+        "iota_wallet_seed": "OJBNQMRJLCOJEFTPPPCZMOXDVMPLHNDOLHWDXMNIAQMFFXY9EIVEHPPIRKNKTOPMYQWWIFJZHUPDQZZKS"
+    },
+    "device_government": {
+        "ble_name": "AKITA M2M IOTA GOV TAX",
+        "ble_uuid": "62ee40901ded435f812a02a7f44c10b5",
+        "iota_wallet_seed": "ABCDQMRJLCOJEFTPPPCZMOXDVMPLHNDOLHWDXMNIAQMFFXY9EIVEHPPIRKNKTOPMYQWWIFJZHUPDQZZKS"
+    }
+}

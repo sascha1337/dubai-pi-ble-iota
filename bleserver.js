@@ -1,39 +1,37 @@
 var bleno = require('bleno');
+var device = require("./config").device;
 
-var name = 'IOTA Dubai M2M parking';
-var serviceUuids = ['fffffffffffffffffffffffffffffff0']
+function init(){
 
-// bleno.startAdvertising(name, serviceUuids, error);
-
-
-bleno.on('stateChange', function(state) {
-    console.log('on -> stateChange: ' + state);
-  
-    if (state === 'poweredOn') {
-      bleno.startAdvertising(name, serviceUuids);
-      console.log("emitting");
-    } else {
-      bleno.stopAdvertising();
-    }
-  });
-  
-  bleno.on('advertisingStart', function(error) {
+    console.log("--------AKITA M2M --------");
+    console.log(device);
+    console.log("--------------------------");
+    
+    bleno.on('stateChange', function(state) {
+        console.log('::BLE:: new state: ' + state);
+        if (state === 'poweredOn') {
+          bleno.startAdvertising(device.ble_name, [device.ble_uuid]);
+        } else {
+          bleno.stopAdvertising();
+        }
+    });
       
-    console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
-  
-    if (!error) {
-        console.log("no err");
-        // bleno.setServices([
-        //     new SampleService()
-        // ]);
-    }
-  });
-  
-  bleno.on('advertisingStop', function() {
-    console.log('on -> advertisingStop');
-  });
-  
-
-function error(err) {
-    console.error(err);
+    bleno.on('advertisingStart', function(error) {
+        if (!error) {
+            console.log("::BLE:: started advertising as", device.ble_name)
+            // bleno.setServices([
+            //     new SampleService()
+            // ]);
+        }else{
+            console.error(error);
+        }
+    });
+    
+    bleno.on('advertisingStop', function() {
+        console.log('::BLE:: advertisingStop');
+    });
 }
+
+
+exports.init = init;
+exports.bleno = bleno;
