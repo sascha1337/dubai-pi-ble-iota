@@ -1,4 +1,4 @@
-var config = require("./config_station.json");
+var config = require("./config_parking.json");
 
 var webservice = require("./webservice");
 var bleserver = require("./bleserver");
