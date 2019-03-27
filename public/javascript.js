@@ -8,7 +8,7 @@ socket.on('message', function (msg) {
 });
 
 socket.on('log', function (msg) {
-    $('.log').append("<br>" + msg);
+    $('.log').append(msg);
     console.log(msg);
 })
 
