@@ -20,19 +20,23 @@ function disconnect(ctx){
 }
 
 function broadcast(dat){
-    io.emit("message",dat);
+    if(io)
+        io.emit("message",dat);
 }
 
 function broadcast_log(dat){
-    io.emit("log",dat);
+    if(io)
+        io.emit("log",dat);
 }
 
 function broadcast_status(dat){
-    io.emit("status",dat);
+    if(io)
+        io.emit("status",dat);
 }
 
 function broadcast_rssi(dat){
-    io.emit("rssi",dat);
+    if(io)
+        io.emit("rssi",dat);
 }
 
 module.exports.io = io;
