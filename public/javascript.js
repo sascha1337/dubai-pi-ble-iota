@@ -69,7 +69,7 @@ var data = {
 }
 
 var optionsAnimations = { 
-    animation: true,
+    animation: false,
     scales:{
         yAxes: [{
             ticks: {
