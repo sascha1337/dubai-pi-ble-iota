@@ -64,7 +64,6 @@ function init(){
         var serviceData = advertisement.serviceData;
         var serviceUuids = advertisement.serviceUuids;
         
-        
         if(localName == device_parking.ble_name) {
           
           // console.log("::BLE::", localName, "->", peripheral.rssi);

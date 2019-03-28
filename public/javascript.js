@@ -14,8 +14,13 @@ socket.on('log', function (msg) {
     console.log(msg);
 })
 
+socket.on('realtime', function(msg){
+    $(".realtime").empty().append(msg);
+});
+
 socket.on('rssi', function (rssi) {
     $('.rssi').empty().append(rssi);
+    $('.rssi2').empty().append(rssi);
     // console.log(rssi);
 
     var length = data.labels.length
@@ -35,11 +40,18 @@ socket.on('status', function (msg) {
     // console.log(msg);
 })
 
+var prices = {
+    aed: 3.67,
+    iota_aed: 1.128323517,
+    iota_usd: 0.3074451
+};
+
 $(function(){
     setInterval(function(){
-        console.log("fetch prices");
+        // console.log("fetch prices");
         $.get("http://localhost:3000/prices", function(data){
             console.log(data);
+            prices = data;
         });
     }, 60000);
 });

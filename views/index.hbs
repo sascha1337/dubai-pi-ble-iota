@@ -6,23 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
-    
+    <style> 
+      .akita-pink{color:#ca4dd5;} 
+      body{background-color: #080808 !important;}
+      .list-group-item{background-color:#252525 !important}  
+    </style>
   </head>
   <body>
 
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-2">
-          <img src="/akita.jpg" alt="" class="img-fluid" style="height:100px">
+        <div class="col-md-4">
+          <img src="/akita.jpg" alt="" class="img-fluid d-inline" style="height:120px">
+          <img src="/akita_qr.png" alt="" class="img-fluid d-inline" style="height:120px">
         </div>
         <div class="col-md-4">
-          <h4>Smart Machine Agent #1</h4>
-        </div>
-        <div class="col-md-2">
-          <img src="/iota_icon_light.svg" alt="" class="img-fluid" style="height:100px">
+          <h2 class="akita-pink d-inline">Smart Machine Agent #1</h2>
         </div>
         <div class="col-md-4">
-          <h4>Dubai Summit</h4>
+          <img src="/summit.png" alt="" class="img-fluid d-inline" style="height:80px">
+          <img src="/iota_icon_light.svg" alt="" class="img-fluid d-inline" style="height:110px">
         </div>
       </div>
       <div class="row">
@@ -30,20 +33,26 @@
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-live" role="tabpanel" aria-labelledby="pills-live-tab">
               <div class="row">
+                <div class="col-md-12" style="font-size:1.3em">
+                  RSSI: <span class="rssi2">N/A</span> | DEBUG: <span class="realtime">idle</span>
+                </div>
                 <div class="col-md-4">
-                  <ul class="list-group text-center" style="font-size:1.5em">
-                    <li class="list-group-item"><b>Balance</b> </li>
+                  <ul class="list-group text-center" style="font-size:2.5em">
+
+                    <li class="list-group-item">
+                      <img src="/device_car_slim.png" alt="" class=" img-fluid d-inline" style="height:40px">
+                      <b>Balance</b> 
+                    </li>
                     <li class="list-group-item"><b>1.000,00</b> AED</li>
-                    <li class="list-group-item"><b>972 mIOTA</b></li>
+                    <li class="list-group-item akita-pink"><b>972 mIOTA</b></li>
                     <li class="list-group-item"><b>272,25 </b>USD</li>
                 </div>
                 <div class="col-md-8">
-                  <ul class="list-group text-center" style="font-size:1.5em">
+                  <ul class="list-group text-center" style="font-size:2.5em">
                     <li class="list-group-item"><b>Status:</b> DRIVING</li>
                     <li class="list-group-item"><b>@Dubai Future Blockchain Summit:</b></li>
                     <li class="list-group-item"><b>Parking Duration:</b></li>
-                    <li class="list-group-item"><b>00:00:00</b></li>
-
+                    <li class="list-group-item akita-pink"><b>00:00:00</b></li>
                 </div>
               </div>
 
@@ -123,13 +132,13 @@
           <hr>
           <ul class="nav fixed-bottom nav-pills nav-fill justify-content-center" id="pills-tab" role="tablist" style="margin-bottom:1px">
             <li class="nav-item">
-              <a class="nav-link active" id="pills-live-tab" data-toggle="pill" href="#pills-live" role="tab" aria-controls="pills-live" aria-selected="true"><h5>LIVE</h5></a>
+              <a class="nav-link active" id="pills-live-tab" data-toggle="pill" href="#pills-live" role="tab" aria-controls="pills-live" aria-selected="true"><h3>LIVE</h3></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-history-tab" data-toggle="pill" href="#pills-history" role="tab" aria-controls="pills-history" aria-selected="false"><h5>HISTORY</h5></a>
+              <a class="nav-link" id="pills-history-tab" data-toggle="pill" href="#pills-history" role="tab" aria-controls="pills-history" aria-selected="false"><h3>HISTORY</h3></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="pills-debug-tab" data-toggle="pill" href="#pills-debug" role="tab" aria-controls="pills-debug" aria-selected="false"><h5>DEBUG</h5></a>
+              <a class="nav-link" id="pills-debug-tab" data-toggle="pill" href="#pills-debug" role="tab" aria-controls="pills-debug" aria-selected="false"><h3>DEBUG</h3></a>
             </li>
           </ul>
 

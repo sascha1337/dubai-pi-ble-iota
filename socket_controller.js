@@ -5,18 +5,18 @@
 var io;
 
 function connect(ctx){
-    console.log("::SOCKET::", "interface connected");
+    // console.log("::SOCKET::", "interface connected");
     io = ctx.io;
 }
 
 function message(ctx){
-    console.log("::SOCKET_MSG::", ctx.data);
-    ctx.socket.emit("message", ctx.data);
+    // console.log("::SOCKET_MSG::", ctx.data);
+    // ctx.socket.emit("message", ctx.data);
 }
 
 function disconnect(ctx){
     // console.log(ctx);
-    console.log("::SOCKET_MSG::", "interface disconnected");
+    // console.log("::SOCKET_MSG::", "interface disconnected");
 }
 
 function broadcast(dat){
@@ -39,6 +39,12 @@ function broadcast_rssi(dat){
         io.emit("rssi",dat);
 }
 
+function broadcast_realtime(dat){
+    if(io)
+        io.emit("realtime", dat);
+}
+
+
 module.exports.io = io;
 module.exports.connect = connect;
 module.exports.message = message;
@@ -48,3 +54,4 @@ module.exports.broadcast = broadcast;
 module.exports.broadcast_log = broadcast_log;
 module.exports.broadcast_status = broadcast_status;
 module.exports.broadcast_rssi = broadcast_rssi;
+module.exports.broadcast_realtime = broadcast_realtime;
