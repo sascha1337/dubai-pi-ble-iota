@@ -53,10 +53,18 @@
                 </div>
                 <div class="col-md-8">
                   <ul class="list-group text-center" style="font-size:2.5em">
-                    <li class="list-group-item"><b>Status:</b> DRIVING</li>
-                    <li class="list-group-item"><b>@Dubai Future Blockchain Summit:</b></li>
-                    <li class="list-group-item"><b>Parking Duration:</b></li>
-                    <li class="list-group-item akita-pink"><b>00:00:00</b></li>
+                    {{#if device.car }}
+                      <li class="list-group-item"><b>Status:</b> DRIVING</li>
+                      <li class="list-group-item"><b>@Dubai Future Blockchain Summit:</b></li>
+                      <li class="list-group-item"><b>Parking Duration:</b></li>
+                      <li class="list-group-item akita-pink"><b>00:00:00</b></li>
+                    {{/if}}
+                    {{#if device.station }}
+                      <li class="list-group-item"><b>Parking spot:</b></li>
+                      <li class="list-group-item"><b>Not occupied</b></li>
+                      <li class="list-group-item"><b>Parking Duration:</b></li>
+                      <li class="list-group-item akita-pink"><b>00:00:00</b></li>
+                    {{/if}}
                 </div>
               </div>
 

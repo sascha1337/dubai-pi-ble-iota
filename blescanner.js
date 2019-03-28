@@ -1,4 +1,4 @@
-var device = require("./config_car.json");
+var device_car = require("./config_car.json");
 var device_parking = require("./config_parking.json");
 
 var noble = require('noble');
@@ -64,7 +64,7 @@ function init(){
         var serviceData = advertisement.serviceData;
         var serviceUuids = advertisement.serviceUuids;
         
-        if(localName == device_parking.ble_name) {
+        if(localName == device_car.ble_name) {
           
           // console.log("::BLE::", localName, "->", peripheral.rssi);
           
@@ -76,22 +76,28 @@ function init(){
       
           // process.stdout.write("# " + rssi + " ");
           
-          if(conn === "disconnected" && !isParking && rssi > -5) {
+          if(conn === "disconnected" && !isParking && rssi > -25) {
+
+            socket_ctrl.broadcast_realtime("### Car is parking " + parkingSeconds.toString() + " seconds...")
+
             parkingSeconds = 0;
       
             isParking = true;
+            
             currentStatus = "### Car is parking " + parkingSeconds.toString() + " seconds...";
             currentStatusTwo = "";
             currentStatusThree = "";
             
             now = moment(new Date()); //todays date
-      
             bufferOut();
       
             intervalOne = setInterval(function () {
               if(isParking){
+                
                 parkingSeconds++;
                 currentStatus = "### Car is parking " + parkingSeconds.toString() + " seconds...";
+                socket_ctrl.broadcast_realtime("### Car is parking " + parkingSeconds.toString() + " seconds...")
+
                 bufferOut();
               }else{
                 clearInterval(intervalOne);
