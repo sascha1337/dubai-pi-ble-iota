@@ -1,5 +1,7 @@
 // Connect to the server-side websockets. But there's no server yet!
 
+var ust_to_aed = 3.67250;
+
 var socket = io();
 
 // When we receive a message
@@ -34,10 +36,14 @@ socket.on('status', function (msg) {
 })
 
 $(function(){
-    $.get("https://api.thetangle.org/market/prices", function(data){
-        console.log(data);
-    });
+    setInterval(function(){
+        console.log("fetch prices");
+        $.get("http://localhost:3000/prices", function(data){
+            console.log(data);
+        });
+    }, 60000);
 });
+
 
 var ctx = document.getElementById('chart').getContext('2d')
 
@@ -51,7 +57,7 @@ var data = {
 }
 
 var optionsAnimations = { 
-    animation: false,
+    animation: true,
     scales:{
         yAxes: [{
             ticks: {

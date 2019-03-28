@@ -5,40 +5,138 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css">
     
   </head>
   <body>
 
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6">
-          {{!-- <h2>AKITA M2M DEMO</h2> --}}
-          {{!-- <h4>{</h4> --}}
-          <div class="logger">
-            <ul class="list-group">
-              <li class="list-group-item"><b>Device:</b> {{ device.ble_name }}</li>
-              <li class="list-group-item"><b>RSSI Log:</b><div class="rssi"></div></li>
-              <li class="list-group-item"><b>Debug Log:</b><div class="log"></div></li>
-              <li class="list-group-item"><b>Status:</b><div class="status"></div></li>
-              
-            </ul>
+        <div class="col-md-2">
+          <img src="/akita.jpg" alt="" class="img-fluid" style="height:100px">
+        </div>
+        <div class="col-md-4">
+          <h4>Smart Machine Agent #1</h4>
+        </div>
+        <div class="col-md-2">
+          <img src="/iota_icon_light.svg" alt="" class="img-fluid" style="height:100px">
+        </div>
+        <div class="col-md-4">
+          <h4>Dubai Summit</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" style="margin-top:10px">
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-live" role="tabpanel" aria-labelledby="pills-live-tab">
+              <div class="row">
+                <div class="col-md-4">
+                  <ul class="list-group text-center" style="font-size:1.5em">
+                    <li class="list-group-item"><b>Balance</b> </li>
+                    <li class="list-group-item"><b>1.000,00</b> AED</li>
+                    <li class="list-group-item"><b>972 mIOTA</b></li>
+                    <li class="list-group-item"><b>272,25 </b>USD</li>
+                </div>
+                <div class="col-md-8">
+                  <ul class="list-group text-center" style="font-size:1.5em">
+                    <li class="list-group-item"><b>Status:</b> DRIVING</li>
+                    <li class="list-group-item"><b>@Dubai Future Blockchain Summit:</b></li>
+                    <li class="list-group-item"><b>Parking Duration:</b></li>
+                    <li class="list-group-item"><b>00:00:00</b></li>
+
+                </div>
+              </div>
+
+
+            </div>
+            <div class="tab-pane fade" id="pills-history" role="tabpanel" aria-labelledby="pills-history-tab">
+              <h4>IOTA Transaction History</h4>
+              <ul class="list-group" style="font-size:1.4em">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span>Parking duration 12 min</span> 
+                  <small class="mute">
+                    <a href="https://thetangle.org/transaction/EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZVQOGMB9XVNUZVXEVVNLDROMSVQBGPHEKEOA9999">EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZ...</a>
+                  </small>
+                  <span class="badge badge-primary badge-pill float-right">Sent 53 IOTA</span>
+                  
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Parking duration 60 min
+                  <small class="mute">
+                    <a href="https://thetangle.org/transaction/IKIEIHJMPNIYWRAMNTGCZRTSUCINCS9GYWEDTIJDHHLJUCVGLQOJRX9QAOMUJVAJJZNFFCEJXNRFZ9999">IKIEIHJMPNIYWRAMNTGCZRTSUCINCS9GYWEDTIJDHHLJ...</a>
+                  </small>
+                  <span class="badge badge-primary badge-pill float-right">Sent 72 IOTA</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Parking duration 12 min
+                  <small class="mute">
+                    <a href="https://thetangle.org/transaction/EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZVQOGMB9XVNUZVXEVVNLDROMSVQBGPHEKEOA9999">EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZ...</a>
+                  </small>
+                  <span class="badge badge-primary badge-pill float-right">Sent 234 IOTA</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Parking duration 60 min
+                  <small class="mute">
+                    <a href="https://thetangle.org/transaction/IKIEIHJMPNIYWRAMNTGCZRTSUCINCS9GYWEDTIJDHHLJUCVGLQOJRX9QAOMUJVAJJZNFFCEJXNRFZ9999">IKIEIHJMPNIYWRAMNTGCZRTSUCINCS9GYWEDTIJDHHLJ...</a>
+                  </small>
+                  <span class="badge badge-primary badge-pill float-right">Sent 133 IOTA</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Parking duration 12 min
+                  <small class="mute">
+                    <a href="https://thetangle.org/transaction/EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZVQOGMB9XVNUZVXEVVNLDROMSVQBGPHEKEOA9999">EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZ...</a>
+                  </small>
+                  <span class="badge badge-primary badge-pill float-right">Sent 523 IOTA</span>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-pane fade" id="pills-debug" role="tabpanel" aria-labelledby="pills-debug-tab">
+              <div class="row">
+                <div class="col-md-12">
+                  {{!-- <h2>AKITA M2M DEMO</h2> --}}
+                  {{!-- <h4>{</h4> --}}
+                  <div class="logger row">
+                    {{!-- <ul class="list-group row"> --}}
+                      {{!-- <li class="list-group-item"><b>Device:</b> {{ device.ble_name }}</li> --}}
+                      <div class="alert  col-md-6"><b>RSSI Log:</b><span class="rssi"></span></div>
+                      {{!-- <div class="list-group-item"><b>Debug Log:</b><span class="log"></span></div> --}}
+                      <div class="alert col-md-6"><b>Status:</b><span class="status"></span></div>
+                      
+                    {{!-- </ul> --}}
+                  </div>
+                </div>
+                {{!-- <div class="col-md-6">
+                  <ul class="list-group">
+                    <li class="list-group-item"><b>IOTA Balance:</b> 1.000.000 iOTA</li>
+                    <li class="list-group-item"><b>in USD: </b> 0.301 USD</li>
+                    <li class="list-group-item"><b>in AED: </b> 1.105 AED</li>
+                </div> --}}
+                <div class="col-md-12">
+                  <canvas id="chart" width="600" height="150"></canvas>
+                </div>
+
+                {{!-- <h3>Device: {{ device.ble_name }}</h3> --}}
+                {{!-- <hr> --}}
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <ul class="list-group">
-            <li class="list-group-item"><b>IOTA Balance:</b> 1.000.000 iOTA</li>
-            <li class="list-group-item"><b>in USD: </b> 0.301 USD</li>
-            <li class="list-group-item"><b>in AED: </b> 1.105 AED</li>
-        </div>
-        <div class="col-md-12">
+          <hr>
+          <ul class="nav fixed-bottom nav-pills nav-fill justify-content-center" id="pills-tab" role="tablist" style="margin-bottom:1px">
+            <li class="nav-item">
+              <a class="nav-link active" id="pills-live-tab" data-toggle="pill" href="#pills-live" role="tab" aria-controls="pills-live" aria-selected="true"><h5>LIVE</h5></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-history-tab" data-toggle="pill" href="#pills-history" role="tab" aria-controls="pills-history" aria-selected="false"><h5>HISTORY</h5></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="pills-debug-tab" data-toggle="pill" href="#pills-debug" role="tab" aria-controls="pills-debug" aria-selected="false"><h5>DEBUG</h5></a>
+            </li>
+          </ul>
 
-          <canvas id="chart" width="600" height="150"></canvas>
         </div>
+      </div>
+      
 
-        {{!-- <h3>Device: {{ device.ble_name }}</h3> --}}
-        {{!-- <hr> --}}
-        </div>
       </div>
     </div>
 

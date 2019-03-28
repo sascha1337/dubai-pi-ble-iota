@@ -1,19 +1,28 @@
 const IOTA = require("iota.lib.js");
 const server = require('server');
 const socket_ctrl = require("./socket_controller");
+const request = require("request");
+
 // const device = require("./config");
 
 function init(config){
     
     const { get, post, error, socket } = server.router;
-    const { render, json, status } = server.reply;
+    const { render, json, status, header } = server.reply;
     const security =  { security: { csrf: false  } }
-    
-    server(security, [
+
+    const cors = [
+        ctx => header("Access-Control-Allow-Origin", "*"),
+        ctx => header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"),
+        ctx => ctx.method.toLowerCase() === 'options' ? 200 : false
+      ];
+      
+    server(security, cors, [
         get('/', getDashboard),
         get('/socket_broadcast', testBroadcastIo),
         get('/lotaddr', getAddr),
         get('/device', getDeviceInfo),
+        get("/prices", getPrices),
         post('/maketx', ctx => {
             console.log(ctx.data);
             json(ctx.data)
@@ -25,13 +34,47 @@ function init(config){
         error(ctx => status(500).send(ctx.error.message))
     ]);
     
+    function getIOTAprice(){
+        return new Promise((resolve, reject) => {
+            request.get("https://api.thetangle.org/market/prices",(a,b,c) => {
+                if(!a){
+                    console.log(c);
+                    resolve(JSON.parse(c));
+                }else{
+                    console.log("ERROR THETANGLE PRICE");
+                }
+            });
+        });
+    }
+    
+    function getAEDprice(){
+        return new Promise((resolve, reject) => {
+            request("https://free.currencyconverterapi.com/api/v6/convert?q=USD_AED&compact=ultra&apiKey=1ae8bd707d9b9d03751e",(a,b,c) => {
+                if(!a){
+                    console.log(c);
+                    resolve(JSON.parse(c));
+                }else{
+                    console.log("ERROR AED PRICE");
+                    resolve({"USD_AED": 3.67315});
+                }
+            });
+
+        });
+    }
+    
+    async function getPrices(){
+        var iotaprice = await getIOTAprice();
+        var aedprice = await getAEDprice();
+        return json({iota_usd: iotaprice.USD, iota_aed: iotaprice.USD * aedprice.USD_AED, aed:aedprice.USD_AED });
+    }
     
     function getDeviceInfo(){
         return device;
     }
     
-    function getDashboard(ctx){
-        return render('index.hbs', {device:config});
+    async function getDashboard(ctx){
+        var prices = await getPrices();
+        return render('index.hbs', {device:config, prices});
     }
     
     function testBroadcastIo(ctx){
