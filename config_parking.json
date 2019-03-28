@@ -1,5 +1,6 @@
 {
     "mode": "device_parking",
+    "station": true,
     "frontend_port": 1337,
     "ble_name": "AKITA PiStation Parking",
     "ble_uuid": "13373eed5bb3489e81ac6d052d8cf93b",

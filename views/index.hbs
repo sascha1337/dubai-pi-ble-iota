@@ -21,7 +21,8 @@
           <img src="/akita_qr.png" alt="" class="img-fluid d-inline" style="height:120px">
         </div>
         <div class="col-md-4">
-          <h2 class="akita-pink d-inline">Smart Machine Agent #1</h2>
+          {{#if device.car }} <h2 class="akita-pink d-inline">Smart Machine Agent #1</h2> {{/if}}
+          {{#if device.station }} <h2 class="akita-pink d-inline">Smart Machine Agent #2</h2> {{/if}}
         </div>
         <div class="col-md-4">
           <img src="/summit.png" alt="" class="img-fluid d-inline" style="height:80px">
@@ -35,12 +36,15 @@
               <div class="row">
                 <div class="col-md-12" style="font-size:1.3em">
                   RSSI: <span class="rssi2">N/A</span> | DEBUG: <span class="realtime">idle</span>
+                  <br>
                 </div>
                 <div class="col-md-4">
                   <ul class="list-group text-center" style="font-size:2.5em">
 
                     <li class="list-group-item">
-                      <img src="/device_car_slim.png" alt="" class=" img-fluid d-inline" style="height:40px">
+                      {{#if device.car }} <img src="/device_car_slim.png" alt="" class=" img-fluid d-inline" style="height:40px"> {{/if}}
+                      {{#if device.station }} <img src="/device_parking.png" alt="" class=" img-fluid d-inline" style="height:40px"> {{/if}}
+
                       <b>Balance</b> 
                     </li>
                     <li class="list-group-item"><b>1.000,00</b> AED</li>

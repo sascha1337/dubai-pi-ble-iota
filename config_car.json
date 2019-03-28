@@ -1,5 +1,6 @@
 {
     "mode": "device_car",
+    "car":true,
     "frontend_port": 1337,
     "ble_name": "AKITA M2M IOTA CAR",
     "ble_uuid": "1337dd542257441fb23bfb071ea45c82",
