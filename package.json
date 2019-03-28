@@ -19,6 +19,7 @@
   "dependencies": {
     "bleno": "^0.5.0",
     "iota.lib.js": "^0.5.1",
+    "kalmanjs": "^1.1.0",
     "moment": "^2.24.0",
     "noble": "^1.9.1",
     "request": "^2.88.0",
