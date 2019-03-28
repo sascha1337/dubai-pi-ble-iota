@@ -78,17 +78,19 @@ function init(){
           
           if(conn === "disconnected" && !isParking && rssi > device_parking.parking_rssi_start) {
 
-            socket_ctrl.broadcast_realtime("### Car is parking " + parkingSeconds.toString() + " seconds...")
-
+            
             parkingSeconds = 0;
-      
+            
             isParking = true;
             
             currentStatus = "### Car is parking " + parkingSeconds.toString() + " seconds...";
             currentStatusTwo = "";
             currentStatusThree = "";
+
+            socket_ctrl.broadcast_realtime("### Car is parking " + parkingSeconds.toString() + " seconds...")
             
             now = moment(new Date()); //todays date
+            
             bufferOut();
       
             intervalOne = setInterval(function () {
