@@ -1,7 +1,7 @@
 {
     "mode": "device_parking",
     "frontend_port": 1337,
-    "ble_name": "AKITA M2M IOTA GOV TAX",
-    "ble_uuid": "62ee40901ded435f812a02a7f44c10b5",
+    "ble_name": "AKITA  GOV TAX",
+    "ble_uuid": "133840901ded435f812a02a7f44c10b5",
     "iota_wallet_seed": "ABCDQMRJLCOJEFTPPPCZMOXDVMPLHNDOLHWDXMNIAQMFFXY9EIVEHPPIRKNKTOPMYQWWIFJZHUPDQZZKS"
 }
