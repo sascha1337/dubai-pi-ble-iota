@@ -76,7 +76,7 @@ function init(){
       
           // process.stdout.write("# " + rssi + " ");
           
-          if(conn === "disconnected" && !isParking && rssi > -25) {
+          if(conn === "disconnected" && !isParking && rssi > device_parking.parking_rssi_start) {
 
             socket_ctrl.broadcast_realtime("### Car is parking " + parkingSeconds.toString() + " seconds...")
 
@@ -106,13 +106,16 @@ function init(){
       
           }
       
-          if(conn === "disconnected"  && isParking && rssi < -30) {
+          if(conn === "disconnected"  && isParking && rssi < device_parking.parking_rssi_end) {
             if(intervalOne) clearInterval(intervalOne);
       
             isParking = false;
             end = moment(new Date()); // another date
             var duration = moment.duration(end.diff(now));
             var cost = Math.round(duration.asSeconds()) * 100;
+
+            socket_ctrl.broadcast_realtime("### STOPPED -> duration: " + Math.round(duration.asSeconds()) + " seconds")
+
       
             console.log("### Parking stopped, executing IOTA payment");
             console.log("### Car stopped parking");
