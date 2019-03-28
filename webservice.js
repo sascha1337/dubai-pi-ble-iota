@@ -38,34 +38,41 @@ function init(config){
         return new Promise((resolve, reject) => {
             request.get("https://api.thetangle.org/market/prices",(a,b,c) => {
                 if(!a){
-                    console.log(c);
-                    resolve(JSON.parse(c));
+                    // console.log(c);
+                    var price;
+                    try {
+                        price = JSON.parse(c);
+                        resolve(price);
+                    } catch(ex) {
+                        resolve({USD: 0.308});
+                    }
                 }else{
+                    resolve()
                     console.log("ERROR THETANGLE PRICE");
                 }
             });
         });
     }
     
-    function getAEDprice(){
-        return new Promise((resolve, reject) => {
-            request("https://free.currencyconverterapi.com/api/v6/convert?q=USD_AED&compact=ultra&apiKey=1ae8bd707d9b9d03751e",(a,b,c) => {
-                if(!a){
-                    console.log(c);
-                    resolve(JSON.parse(c));
-                }else{
-                    console.log("ERROR AED PRICE");
-                    resolve({"USD_AED": 3.67315});
-                }
-            });
+    // function getAEDprice(){
+    //     return new Promise((resolve, reject) => {
+    //         request("https://free.currencyconverterapi.com/api/v6/convert?q=USD_AED&compact=ultra&apiKey=1ae8bd707d9b9d03751e",(a,b,c) => {
+    //             if(!a){
+    //                 console.log(c);
+    //                 resolve(JSON.parse(c));
+    //             }else{
+    //                 console.log("ERROR AED PRICE");
+    //                 resolve({"USD_AED": 3.67315});
+    //             }
+    //         });
 
-        });
-    }
+    //     });
+    // }
     
     async function getPrices(){
         var iotaprice = await getIOTAprice();
-        var aedprice = await getAEDprice();
-        return json({iota_usd: iotaprice.USD, iota_aed: iotaprice.USD * aedprice.USD_AED, aed:aedprice.USD_AED });
+        // var aedprice = await getAEDprice();
+        return json({iota_usd: iotaprice.USD, iota_aed: iotaprice.USD * 3.67, aed:3.67 });
     }
     
     function getDeviceInfo(){
