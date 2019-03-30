@@ -4,14 +4,14 @@ var device_list;
 var socket_car;
 var socket_gov;
 var socket_station;
-
 var socket;
 
 var ust_to_aed = 3.67250;
 var kf = new KalmanFilter({R: 0.8, Q: 20});
 
-
-
+// broadcast_status({type:"parking_start"});
+// broadcast_status({type:"parking_duration", parkingSeconds
+// broadcast_status({type:"parking_done", duration, cost });
 
 function setup_sockets(){
     
@@ -54,7 +54,23 @@ function setup_sockets(){
     })
 
     socket_station.on('status', function (msg) {
-        $('.status').empty().append(msg);
+        // $('.status').empty().append(msg);
+        console.log(":::status:::", msg);
+
+        if(msg.type == "parking_start"){
+            $(".status_car").empty().append("*PARKING*")
+            $(".status_parking").empty().append("*CAR PARKING*")
+        }
+
+        if(msg.type == "parking_duration"){
+            $(".parking_duration").empty().append(msg.parkingSeconds);
+        }
+
+        if(msg.type == "parking_done"){
+            $(".status_car").empty().append("DRIVING")
+            $(".status_parking").empty().append("Not Occupied")
+        }
+
     })
 }
 
@@ -79,7 +95,7 @@ $(function(){
             // socket_car = io("http://" + device_list.car.zerotier_ip_dev + ":3000");
             socket_station = io("http://" + device_list.station.zerotier_ip_dev + ":3000");
             // socket_gov = io("http://" + device_list.gov.zerotier_ip_dev + ":3000");
-
+            
             setup_sockets();
 
             // if(device.car){

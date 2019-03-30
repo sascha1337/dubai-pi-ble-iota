@@ -67,8 +67,6 @@ function init(){
         if(localName == device_car.ble_name) {
           
           // console.log("::BLE::", localName, "->", peripheral.rssi);
-          
-          socket_ctrl.broadcast_status("::BLE::" + " " + localName + " visible")
           socket_ctrl.broadcast_rssi(peripheral.rssi)
           
           var rssi = peripheral.rssi;
@@ -78,9 +76,9 @@ function init(){
           
           if(conn === "disconnected" && !isParking && rssi > device_parking.parking_rssi_start) {
 
+            socket_ctrl.broadcast_status({type:"parking_start"});
             
             parkingSeconds = 0;
-            
             isParking = true;
             
             currentStatus = "### Car is parking " + parkingSeconds.toString() + " seconds...";
@@ -90,8 +88,8 @@ function init(){
             socket_ctrl.broadcast_realtime("### Car is parking " + parkingSeconds.toString() + " seconds...")
             
             now = moment(new Date()); //todays date
-            
-            bufferOut();
+
+            // bufferOut();
       
             intervalOne = setInterval(function () {
               if(isParking){
@@ -99,8 +97,9 @@ function init(){
                 parkingSeconds++;
                 currentStatus = "### Car is parking " + parkingSeconds.toString() + " seconds...";
                 socket_ctrl.broadcast_realtime("### Car is parking " + parkingSeconds.toString() + " seconds...")
+                socket_ctrl.broadcast_status({type:"parking_duration", parkingSeconds });
 
-                bufferOut();
+                // bufferOut();
               }else{
                 clearInterval(intervalOne);
               }
@@ -110,22 +109,22 @@ function init(){
       
           if(conn === "disconnected"  && isParking && rssi < device_parking.parking_rssi_end) {
             if(intervalOne) clearInterval(intervalOne);
-      
             isParking = false;
             end = moment(new Date()); // another date
-            var duration = moment.duration(end.diff(now));
-            var cost = Math.round(duration.asSeconds()) * 100;
 
-            socket_ctrl.broadcast_realtime("### STOPPED -> duration: " + Math.round(duration.asSeconds()) + " seconds")
+            var duration = Math.round(moment.duration(end.diff(now)).asSeconds());
+            var cost = duration * 100;
 
-      
-            console.log("### Parking stopped, executing IOTA payment");
-            console.log("### Car stopped parking");
-            console.log("-> duration: " + Math.round(duration.asSeconds()) + " seconds");
-            console.log("-> sended iOTA: " + cost + " i");
-      
+            // console.log("### Parking stopped, executing IOTA payment");
+            // console.log("### Car stopped parking");
+            // console.log("-> duration: " + Math.round(duration.asSeconds()) + " seconds");
+            // console.log("-> sended iOTA: " + cost + " i");
+            
             myBalance = myBalance - cost;
             
+            socket_ctrl.broadcast_status({type:"parking_done", duration, cost });
+            socket_ctrl.broadcast_realtime("### STOPPED -> duration: " + duration + " seconds")
+
             currentStatus = "Car stopped parking";
             currentStatusTwo = "Parking duration: " + Math.round(duration.asSeconds()) + " seconds";
             currentStatusThree = "Preparing " + cost + " iOTA transfer to parking lot ...";
