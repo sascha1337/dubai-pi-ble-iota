@@ -1,4 +1,5 @@
 var kf = new KalmanFilter();
+
 var socket = io();
 var ust_to_aed = 3.67250;
 
@@ -82,11 +83,11 @@ var data = {
   datasets: [{
     data: [0],
     label: 'RSSI',
-    backgroundColor: '#ff6600'
+    // backgroundColor: '#ff6600'
   },{
     data: [0],
     label: 'KALMAN',
-    backgroundColor: '#ca4dd5'
+    // backgroundColor: '#ca4dd5'
   }]
 }
 
@@ -95,7 +96,8 @@ var optionsAnimations = {
     scales:{
         yAxes: [{
             ticks: {
-                beginAtZero: true
+                beginAtZero: true,
+                max: -80
             }
         }]
     }
