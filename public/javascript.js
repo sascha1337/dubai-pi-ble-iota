@@ -22,19 +22,6 @@ socket.on('rssi', function (rssi) {
     $('.rssi2').empty().append(rssi);
     // console.log(rssi);
 
-    /* RAW RSSI */
-
-    var length = data.labels.length
-
-    if (length >= 20) {
-      data.datasets[0].data.shift()
-      data.labels.shift()
-    }
-
-    data.labels.push(moment().format('HH:mm:ss'))
-    data.datasets[0].data.push(rssi)
-
-
     /* KALMAN RSSI */
 
     var length = data.labels.length
@@ -46,6 +33,7 @@ socket.on('rssi', function (rssi) {
     }
 
     data.labels.push(moment().format('HH:mm:ss'))
+
     data.datasets[0].data.push(rssi)
     data.datasets[1].data.push(kf.filter(rssi))
 
