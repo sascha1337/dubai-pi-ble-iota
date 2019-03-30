@@ -13,12 +13,17 @@ function init(config){
     var networkInterfaces = os.networkInterfaces( );
     var myIp = ip.address();
 
-    console.log(networkInterfaces);
-    console.log(myIp);
+    // console.log(networkInterfaces);
+    // console.log(myIp);
+    
+    config.ip = myIp;
+    config.networkInterfaces;
 
     const { get, post, error, socket } = server.router;
     const { render, json, status, header } = server.reply;
     const security =  { security: { csrf: false  } }
+
+    console.dir(socket);
 
     const cors = [
         ctx => header("Access-Control-Allow-Origin", "*"),
@@ -31,6 +36,7 @@ function init(config){
         get('/socket_broadcast', testBroadcastIo),
         get('/lotaddr', getAddr),
         get('/device', getDeviceInfo),
+        get('/device_list', getDeviceList),
         get("/prices", getPrices),
         post('/maketx', ctx => {
             console.log(ctx.data);
@@ -86,6 +92,13 @@ function init(config){
     
     function getDeviceInfo(){
         return json(config);
+    }
+
+    function getDeviceList(){
+        var station = require("./config_parking.json");
+        var car = require("./config_car.json");
+        var gov = require("./config_gov.json");
+        return json({car,station,gov});
     }
     
     async function getDashboard(ctx){

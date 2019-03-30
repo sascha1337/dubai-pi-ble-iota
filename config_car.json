@@ -2,9 +2,13 @@
     "mode": "device_car",
     "car":true,
     "frontend_port": 1337,
+    "hostname": "picar.local",
+    "hostname_dev": "pitwo.local",
+    "zerotier_ip": "192.168.195.238",
+    "zerotier_ip_dev": "192.168.195.79",
     "ble_name": "AKITA M2M IOTA CAR",
     "ble_uuid": "1337dd542257441fb23bfb071ea45c82",
     "iota_wallet_seed": "AKITAPIEINSAHAFDHADGHADHRGVFVVRGRBARMWOWQSKQEOFVDMWFBNMMCNVEDVFEDSDGGAGGDFREWOQWX",
-    "parking_rssi_start": -49,
+    "parking_rssi_start": -44,
     "parking_rssi_end": -60
 }

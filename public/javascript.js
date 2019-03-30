@@ -1,53 +1,62 @@
 var device;
+var device_list;
 
-var socket = io();
-var remote_socket;
+var socket_car;
+var socket_gov;
+var socket_station;
+
+var socket;
 
 var ust_to_aed = 3.67250;
 var kf = new KalmanFilter({R: 0.8, Q: 20});
 
-// When we receive a message
-socket.on('message', function (msg) {
-    console.log(msg);
-});
 
-socket.on('log', function (msg) {
-    $('.log').append(msg);
-    console.log(msg);
-})
 
-socket.on('realtime', function(msg){
-    $(".realtime").empty().append(msg);
-});
 
-socket.on('rssi', function (rssi) {
-    $('.rssi').empty().append(rssi);
-    $('.rssi2').empty().append(rssi);
-    // console.log(rssi);
+function setup_sockets(){
+    
+    // When we receive a message
+    socket_station.on('message', function (msg) {
+        console.log(msg);
+    });
 
-    /* KALMAN RSSI */
+    socket_station.on('log', function (msg) {
+        $('.log').append(msg);
+        console.log(msg);
+    })
 
-    var length = data.labels.length
+    socket_station.on('realtime', function(msg){
+        $(".realtime").empty().append(msg);
+    });
 
-    if (length >= 20) {
-      data.datasets[0].data.shift()
-      data.datasets[1].data.shift()
-      data.labels.shift()
-    }
+    socket_station.on('rssi', function (rssi) {
+        $('.rssi').empty().append(rssi);
+        $('.rssi2').empty().append(rssi);
+        // console.log(rssi);
 
-    data.labels.push(moment().format('HH:mm:ss'))
+        /* KALMAN RSSI */
 
-    data.datasets[1].data.push(rssi)
-    data.datasets[0].data.push(kf.filter(rssi))
+        var length = data.labels.length
 
-    chart.update()
-  
-})
+        if (length >= 20) {
+        data.datasets[0].data.shift()
+        data.datasets[1].data.shift()
+        data.labels.shift()
+        }
 
-socket.on('status', function (msg) {
-    $('.status').empty().append(msg);
-    // console.log(msg);
-})
+        data.labels.push(moment().format('HH:mm:ss'))
+
+        data.datasets[1].data.push(rssi)
+        data.datasets[0].data.push(kf.filter(rssi))
+
+        chart.update()
+    
+    })
+
+    socket_station.on('status', function (msg) {
+        $('.status').empty().append(msg);
+    })
+}
 
 var prices = {
     aed: 3.67,
@@ -56,11 +65,38 @@ var prices = {
 };
 
 $(function(){
-    
-    $.get("http://localhost:3000/device", function(data){
+
+    $.get("http://localhost:3000/device", function(data) {
+
         console.log("DEVICE:", data);
         device = data;
+
+        $.get("http://localhost:3000/device_list", function(list){
+            
+            console.log("DEVICE LIST:", list);
+            device_list = list;
+            
+            // socket_car = io("http://" + device_list.car.zerotier_ip_dev + ":3000");
+            socket_station = io("http://" + device_list.station.zerotier_ip_dev + ":3000");
+            // socket_gov = io("http://" + device_list.gov.zerotier_ip_dev + ":3000");
+
+            setup_sockets();
+
+            // if(device.car){
+            //     socket_car = io("http://" + device_list.car.zerotier_ip_dev + ":3000");
+            //     socket_station = io("http://" + device_list.station.zerotier_ip_dev + ":3000");
+            //     socket_gov = io("http://" + device_list.gov.zerotier_ip_dev + ":3000");
+            // }
+            
+            // if(device.station){
+            // }
+
+            // if(device.gov){
+            //     socket_gov = io("http://" + device_list.gov.zerotier_ip_dev + ":3000");
+            // }
+        });
     });
+
 
     setInterval(function(){
         // console.log("fetch prices");
@@ -121,7 +157,4 @@ var chart = new Chart(ctx, {
   type: 'line',
   data: data,
   options: optionsAnimations
-})
-
-socket.on('temperature', function (value) {
 })
