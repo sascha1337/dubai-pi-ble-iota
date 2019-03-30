@@ -1,4 +1,4 @@
-var kf = new KalmanFilter({R: 0.01, Q: 15});
+var kf = new KalmanFilter({R: 0.8, Q: 15});
 
 var socket = io();
 var ust_to_aed = 3.67250;
