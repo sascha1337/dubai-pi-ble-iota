@@ -1,8 +1,6 @@
-// Connect to the server-side websockets. But there's no server yet!
-
-var ust_to_aed = 3.67250;
-
+var kf = new KalmanFilter();
 var socket = io();
+var ust_to_aed = 3.67250;
 
 // When we receive a message
 socket.on('message', function (msg) {
@@ -23,7 +21,10 @@ socket.on('rssi', function (rssi) {
     $('.rssi2').empty().append(rssi);
     // console.log(rssi);
 
+    /* RAW RSSI */
+
     var length = data.labels.length
+
     if (length >= 20) {
       data.datasets[0].data.shift()
       data.labels.shift()
@@ -31,6 +32,22 @@ socket.on('rssi', function (rssi) {
 
     data.labels.push(moment().format('HH:mm:ss'))
     data.datasets[0].data.push(rssi)
+
+
+    /* KALMAN RSSI */
+
+    var length = data.labels.length
+
+    if (length >= 20) {
+      data.datasets[0].data.shift()
+      data.datasets[1].data.shift()
+      data.labels.shift()
+    }
+
+    data.labels.push(moment().format('HH:mm:ss'))
+    data.datasets[0].data.push(rssi)
+    data.datasets[1].data.push(kf.filter(rssi))
+
     chart.update()
   
 })
@@ -52,6 +69,7 @@ $(function(){
         $.get("http://localhost:3000/prices", function(data){
             console.log(data);
             prices = data;
+            
         });
     }, 60000);
 });
@@ -65,6 +83,10 @@ var data = {
     data: [0],
     label: 'RSSI',
     backgroundColor: '#ff6600'
+  },{
+    data: [0],
+    label: 'KALMAN',
+    backgroundColor: '#ca4dd5'
   }]
 }
 
