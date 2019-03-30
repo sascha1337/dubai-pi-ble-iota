@@ -83,12 +83,12 @@ var data = {
   datasets: [{
     data: [0],
     label: 'RSSI',
-    fill: false,
+    // fill: false,
     backgroundColor: "rgba(255, 102, 0, 0.65)"
   },{
     data: [0],
     label: 'KALMAN',
-    fill: false,
+    // fill: false,
     backgroundColor: "rgba(202, 77, 213, 0.83)"
   }]
 }
