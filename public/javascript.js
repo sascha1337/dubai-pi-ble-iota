@@ -34,8 +34,8 @@ socket.on('rssi', function (rssi) {
 
     data.labels.push(moment().format('HH:mm:ss'))
 
-    data.datasets[0].data.push(rssi)
-    data.datasets[1].data.push(kf.filter(rssi))
+    data.datasets[1].data.push(rssi)
+    data.datasets[0].data.push(kf.filter(rssi))
 
     chart.update()
   
@@ -70,11 +70,6 @@ var data = {
   labels: [0],
   datasets: [{
     data: [0],
-    label: 'RSSI',
-    // fill: false,
-    backgroundColor: "rgba(255, 102, 0, 0.95)"
-  },{
-    data: [0],
     label: 'KALMAN',
     fill: false,
     lineTension: 0.1,
@@ -95,7 +90,13 @@ var data = {
     pointHitRadius: 10,
 
     backgroundColor: "rgba(202, 77, 213, 1)"
-  }]
+  },
+  {
+    data: [0],
+    label: 'RSSI',
+    // fill: false,
+    backgroundColor: "rgba(255, 102, 0, 0.9)"
+  },]
 }
 
 var optionsAnimations = { 
