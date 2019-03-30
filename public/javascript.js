@@ -99,7 +99,7 @@ var optionsAnimations = {
         yAxes: [{
             ticks: {
                 beginAtZero: true,
-                max: -80
+                // max: -80
             }
         }]
     }
