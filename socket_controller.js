@@ -2,6 +2,8 @@
 // socket('message', ctrl.message),
 // socket('disconnect', ctrl.disconnect),
 
+// var iota_ctrl = require("./iota_tx");
+
 var io;
 
 function connect(ctx){

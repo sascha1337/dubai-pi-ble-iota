@@ -71,13 +71,14 @@ function setup_sockets(){
         }
 
         if(msg.type == "parking_done"){
-            $(".status_car").empty().append("Status: Driving")
+            $(".status_car").empty().append("Status: Driving").css("color","white");
             $(".status_parking").empty().append("<i>Not occupied</i>").css("color","orange");
             $(".realtime").empty().append("idle");
 
             setInterval(function(){
                 $(".parking_duration").empty().append(hhmmss(0));
             }, 3000);
+            
         }
     })
 }

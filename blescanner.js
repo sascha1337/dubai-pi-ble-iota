@@ -5,6 +5,7 @@ var noble = require('noble');
 var moment = require("moment");
 
 var socket_ctrl = require("./socket_controller");
+var iota_ctrl = require("./iota_tx");
 
 var scanningTimeout = 1000; // one second
 var scanningRepeat = scanningTimeout; // Repeat scanning after 10 seconds for new peripherals.
@@ -25,6 +26,7 @@ var now ;//= moment(new Date()); //todays date
 var end; // = moment(new Date()); // another date
 
 
+
 function bufferOut(){
     console.log(isParking)
     console.log(currentStatus,currentStatusTwo,currentStatusThree);
@@ -35,6 +37,15 @@ function init(){
     noble.on('stateChange', function(state) {
         if (state === 'poweredOn') {
           console.log("::BLE::","poweredOn")
+          
+          iota_ctrl.getAddr(device_parking.iota_wallet_seed).then((dat) => {
+            console.log("::IOTA ADDR::", dat);
+          });
+
+          iota_ctrl.getBalance(device_car.iota_wallet_seed).then((dat) => {
+            console.log("::IOTA BAL::", dat.totalBalance);
+          });
+
           noble.startScanning();
         } else {  
           console.log("::BLE::","stoppedScan")
@@ -76,7 +87,7 @@ function init(){
           
           if(conn === "disconnected" && !isParking && rssi > device_parking.parking_rssi_start) {
 
-            socket_ctrl.broadcast_status({type:"parking_start"});
+            socket_ctrl.broadcast_status({type:"parking_start", addr: iota_ctrl.cached_parking_addr});
             
             parkingSeconds = 0;
             isParking = true;
@@ -85,7 +96,7 @@ function init(){
             currentStatusTwo = "";
             currentStatusThree = "";
 
-            socket_ctrl.broadcast_realtime("### Car is parking " + parkingSeconds.toString() + " seconds...")
+            socket_ctrl.broadcast_realtime("IOTA ADDR: " + iota_ctrl.cached_parking_addr);
             
             now = moment(new Date()); //todays date
 
