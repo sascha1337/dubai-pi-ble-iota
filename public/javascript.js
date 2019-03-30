@@ -13,6 +13,10 @@ var kf = new KalmanFilter({R: 0.8, Q: 20});
 // broadcast_status({type:"parking_duration", parkingSeconds
 // broadcast_status({type:"parking_done", duration, cost });
 
+function wrapRipple(msg){
+    return '<div class="lds-ripple float-left"><div></div><div></div></div> ' + msg + ' <div class="lds-ripple float-right"><div></div><div></div></div>';
+}
+
 function setup_sockets(){
     
     // When we receive a message
@@ -57,20 +61,24 @@ function setup_sockets(){
         // $('.status').empty().append(msg);
         console.log(":::status:::", msg);
 
-        if(msg.type == "parking_start"){
-            $(".status_car").empty().append("*PARKING*")
-            $(".status_parking").empty().append("*CAR PARKING*")
+        if(msg.type == "parking_start") {
+            $(".status_car").empty().append(wrapRipple("PARKING")).css("color","lime");
+            $(".status_parking").empty().append(wrapRipple("Car is parking")).css("color","lime");
         }
 
         if(msg.type == "parking_duration"){
-            $(".parking_duration").empty().append(msg.parkingSeconds);
+            $(".parking_duration").empty().append(hhmmss(msg.parkingSeconds) + " - " + msg.cost + " IOTA");
         }
 
         if(msg.type == "parking_done"){
             $(".status_car").empty().append("DRIVING")
-            $(".status_parking").empty().append("Not Occupied")
-        }
+            $(".status_parking").empty().append("<i>Not occupied</i>").css("color","orange");
+            $(".realtime").empty().append("idle");
 
+            setInterval(function(){
+                $(".parking_duration").empty().append(hhmmss(msg.parkingSeconds));
+            }, 3000);
+        }
     })
 }
 
@@ -174,3 +182,17 @@ var chart = new Chart(ctx, {
   data: data,
   options: optionsAnimations
 })
+
+
+function pad(num) {
+    return ("0"+num).slice(-2);
+}
+
+function hhmmss(secs) {
+  var minutes = Math.floor(secs / 60);
+  secs = secs%60;
+  var hours = Math.floor(minutes/60)
+  minutes = minutes%60;
+  return `${pad(hours)}:${pad(minutes)}:${pad(secs)}`;
+  // return pad(hours)+":"+pad(minutes)+":"+pad(secs); for old browsers
+}
