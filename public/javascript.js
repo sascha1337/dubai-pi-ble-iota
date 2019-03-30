@@ -62,21 +62,21 @@ function setup_sockets(){
         console.log(":::status:::", msg);
 
         if(msg.type == "parking_start") {
-            $(".status_car").empty().append(wrapRipple("PARKING")).css("color","lime");
+            $(".status_car").empty().append(wrapRipple("Status: Parking")).css("color","lime");
             $(".status_parking").empty().append(wrapRipple("Car is parking")).css("color","lime");
         }
 
         if(msg.type == "parking_duration"){
-            $(".parking_duration").empty().append(hhmmss(msg.parkingSeconds) + " - " + msg.cost + " IOTA");
+            $(".parking_duration").empty().append(hhmmss(msg.parkingSeconds));
         }
 
         if(msg.type == "parking_done"){
-            $(".status_car").empty().append("DRIVING")
+            $(".status_car").empty().append("Status: Driving")
             $(".status_parking").empty().append("<i>Not occupied</i>").css("color","orange");
             $(".realtime").empty().append("idle");
 
             setInterval(function(){
-                $(".parking_duration").empty().append(hhmmss(msg.parkingSeconds));
+                $(".parking_duration").empty().append(hhmmss(0));
             }, 3000);
         }
     })
