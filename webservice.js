@@ -3,10 +3,19 @@ const server = require('server');
 const socket_ctrl = require("./socket_controller");
 const request = require("request");
 
+var os = require( 'os' );
+var ip = require('ip');
+
 // const device = require("./config");
 
 function init(config){
     
+    var networkInterfaces = os.networkInterfaces( );
+    var myIp = ip.address();
+
+    console.log(networkInterfaces);
+    console.log(myIp);
+
     const { get, post, error, socket } = server.router;
     const { render, json, status, header } = server.reply;
     const security =  { security: { csrf: false  } }
@@ -76,7 +85,7 @@ function init(config){
     }
     
     function getDeviceInfo(){
-        return device;
+        return json(config);
     }
     
     async function getDashboard(ctx){

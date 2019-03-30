@@ -1,7 +1,10 @@
-var kf = new KalmanFilter({R: 0.8, Q: 15});
+var device;
 
 var socket = io();
+var remote_socket;
+
 var ust_to_aed = 3.67250;
+var kf = new KalmanFilter({R: 0.8, Q: 20});
 
 // When we receive a message
 socket.on('message', function (msg) {
@@ -53,6 +56,12 @@ var prices = {
 };
 
 $(function(){
+    
+    $.get("http://localhost:3000/device", function(data){
+        console.log("DEVICE:", data);
+        device = data;
+    });
+
     setInterval(function(){
         // console.log("fetch prices");
         $.get("http://localhost:3000/prices", function(data){
