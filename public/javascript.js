@@ -84,12 +84,12 @@ var data = {
     data: [0],
     label: 'RSSI',
     fill: false
-    // backgroundColor: '#ff6600'
+    backgroundColor: '#ff6600'
   },{
     data: [0],
     label: 'KALMAN',
     fill: false
-    // backgroundColor: '#ca4dd5'
+    backgroundColor: '#ca4dd5'
   }]
 }
 
