@@ -77,6 +77,23 @@ var data = {
     data: [0],
     label: 'KALMAN',
     fill: false,
+    lineTension: 0.1,
+    // backgroundColor: "rgba(225,0,0,0.4)",
+    borderColor: "red", // The main line color
+    borderCapStyle: 'square',
+    borderDash: [], // try [5, 15] for instance
+    borderDashOffset: 0.0,
+    borderJoinStyle: 'miter',
+    pointBorderColor: "black",
+    pointBackgroundColor: "white",
+    pointBorderWidth: 1,
+    pointHoverRadius: 8,
+    pointHoverBackgroundColor: "yellow",
+    pointHoverBorderColor: "brown",
+    pointHoverBorderWidth: 2,
+    pointRadius: 4,
+    pointHitRadius: 10,
+
     backgroundColor: "rgba(202, 77, 213, 1)"
   }]
 }
