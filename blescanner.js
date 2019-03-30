@@ -125,9 +125,9 @@ function init(){
             socket_ctrl.broadcast_status({type:"parking_done", duration, cost });
             socket_ctrl.broadcast_realtime("### STOPPED -> duration: " + duration + " seconds")
 
-            currentStatus = "Car stopped parking";
-            currentStatusTwo = "Parking duration: " + Math.round(duration.asSeconds()) + " seconds";
-            currentStatusThree = "Preparing " + cost + " iOTA transfer to parking lot ...";
+            // currentStatus = "Car stopped parking";
+            // currentStatusTwo = "Parking duration: " + Math.round(duration.asSeconds()) + " seconds";
+            // currentStatusThree = "Preparing " + cost + " iOTA transfer to parking lot ...";
       
             // console.log("Updated Balance: " + myBalance )
             // bufferOut();
