@@ -72,12 +72,12 @@ var data = {
     data: [0],
     label: 'RSSI',
     // fill: false,
-    backgroundColor: "rgba(255, 102, 0, 0.4)"
+    backgroundColor: "rgba(255, 102, 0, 0.95)"
   },{
     data: [0],
     label: 'KALMAN',
-    // fill: false,
-    backgroundColor: "rgba(202, 77, 213, 0.4)"
+    fill: false,
+    backgroundColor: "rgba(202, 77, 213, 1)"
   }]
 }
 
