@@ -73,7 +73,7 @@ var data = {
     label: 'KALMAN',
     fill: false,
     lineTension: 0.1,
-    // backgroundColor: "rgba(225,0,0,0.4)",
+    backgroundColor: "rgba(202, 77, 213, 1)",
     borderColor: "red", // The main line color
     borderCapStyle: 'square',
     borderDash: [], // try [5, 15] for instance
