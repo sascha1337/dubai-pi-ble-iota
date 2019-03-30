@@ -72,9 +72,8 @@ var data = {
     data: [0],
     label: 'KALMAN',
     fill: false,
-    lineTension: 0.1,
-    backgroundColor: "rgba(202, 77, 213, 1)",
-    borderColor: "red", // The main line color
+    lineTension: 0.15,
+    borderColor:"rgba(202, 77, 213, 1)", // The main line color
     borderCapStyle: 'square',
     borderDash: [], // try [5, 15] for instance
     borderDashOffset: 0.0,
@@ -88,8 +87,6 @@ var data = {
     pointHoverBorderWidth: 2,
     pointRadius: 4,
     pointHitRadius: 10,
-
-    backgroundColor: "rgba(202, 77, 213, 1)"
   },
   {
     data: [0],
