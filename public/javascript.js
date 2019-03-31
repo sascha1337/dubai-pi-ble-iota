@@ -77,6 +77,13 @@ function setup_sockets(){
     
     })
 
+    socket_station.on('tx', (data) => {
+        
+        console.log(data);
+        $(".history").prepend(wrapLi(data.duration,data.cost,data.tx[0].hash));
+
+    });
+    
     socket_station.on('status', function (msg) {
         // $('.status').empty().append(msg);
         

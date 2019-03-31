@@ -139,7 +139,6 @@ function init(){
             socket_ctrl.broadcast_status({type:"parking_done", duration, cost });
             socket_ctrl.broadcast_realtime("### STOPPED -> duration: " + duration + " seconds")
 
-
             createTx(duration,cost);
 
             // currentStatus = "Car stopped parking";
@@ -162,6 +161,7 @@ function init(){
       })
       .then((res) => {
         // console.log(`statusCode: ${res.statusCode}`)
+        socket_ctrl.broadcast_status({type:"tx", duration, cost, tx:res.data)});
         console.log(res.data)
       })
       .catch((error) => {
