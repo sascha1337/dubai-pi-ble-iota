@@ -119,7 +119,7 @@ function setup_sockets(){
                 station_balance_aed = x;
                 $(".balance_aed").empty().append(station_balance_aed.toFixed(2));
                 
-                var new_usd_balance = (car_balance_aed * 0.27);
+                var new_usd_balance = (station_balance_aed * 0.27);
                 var new_iota_balance = new_usd_balance * 3.2711;
 
                 $(".balance_iota").empty().append(new_iota_balance.toFixed(2));
@@ -169,7 +169,7 @@ $(function(){
             station_balance_aed = x;
             $(".balance_aed").empty().append(station_balance_aed.toFixed(2));
             
-            var new_usd_balance = (car_balance_aed * 0.27);
+            var new_usd_balance = (station_balance_aed * 0.27);
             var new_iota_balance = new_usd_balance * 3.2711;
         
             $(".balance_iota").empty().append(new_iota_balance.toFixed(2));
