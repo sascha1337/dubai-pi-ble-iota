@@ -3,6 +3,7 @@ var device_parking = require("./config_parking.json");
 
 var noble = require('noble');
 var moment = require("moment");
+var KalmanFilter = require('kalmanjs')
 
 var socket_ctrl = require("./socket_controller");
 var iota_ctrl = require("./iota_tx");
@@ -25,7 +26,7 @@ var intervalOne;
 var now ;//= moment(new Date()); //todays date
 var end; // = moment(new Date()); // another date
 
-
+var kf = new KalmanFilter({R: 0.8, Q: 20});
 
 function bufferOut(){
     console.log(isParking)
@@ -38,13 +39,13 @@ function init(){
         if (state === 'poweredOn') {
           console.log("::BLE::","poweredOn")
           
-          iota_ctrl.getAddr(device_parking.iota_wallet_seed).then((dat) => {
-            console.log("::IOTA ADDR::", dat);
-          });
+          // iota_ctrl.getAddr(device_parking.iota_wallet_seed).then((dat) => {
+          //   console.log("::IOTA ADDR::", dat);
+          // });
 
-          iota_ctrl.getBalance(device_car.iota_wallet_seed).then((dat) => {
-            console.log("::IOTA BAL::", dat.totalBalance);
-          });
+          // iota_ctrl.getBalance(device_car.iota_wallet_seed).then((dat) => {
+          //   console.log("::IOTA BAL::", dat.totalBalance);
+          // });
 
           noble.startScanning();
         } else {  
@@ -84,8 +85,10 @@ function init(){
           var conn = peripheral.state;
       
           // process.stdout.write("# " + rssi + " ");
+
+          var filtered_rssi = kf.filter(rssi);
           
-          if(conn === "disconnected" && !isParking && rssi > device_parking.parking_rssi_start) {
+          if(conn === "disconnected" && !isParking && filtered_rssi > device_parking.parking_rssi_start) {
 
             socket_ctrl.broadcast_status({type:"parking_start", addr: iota_ctrl.cached_parking_addr});
             
@@ -118,13 +121,13 @@ function init(){
       
           }
       
-          if(conn === "disconnected"  && isParking && rssi < device_parking.parking_rssi_end) {
+          if(conn === "disconnected"  && isParking && filtered_rssi < device_parking.parking_rssi_end) {
             if(intervalOne) clearInterval(intervalOne);
             isParking = false;
             end = moment(new Date()); // another date
 
             var duration = Math.round(moment.duration(end.diff(now)).asSeconds());
-            var cost = duration * 100;
+            var cost = duration;
 
             // console.log("### Parking stopped, executing IOTA payment");
             // console.log("### Car stopped parking");
