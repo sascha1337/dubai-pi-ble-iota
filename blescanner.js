@@ -30,8 +30,7 @@ const axios = require('axios')
 
 var txprocessor = "http://13.67.54.253";
 
-var kf = new KalmanFilter({R: 0.8, Q: 20});
-
+var kf = new KalmanFilter({R: 0.8, Q: 5});
 
 function init(){
 
@@ -162,11 +161,11 @@ function init(){
         cost
       })
       .then((res) => {
-        console.log(`statusCode: ${res.statusCode}`)
+        // console.log(`statusCode: ${res.statusCode}`)
         console.log(res.data)
       })
       .catch((error) => {
-        console.error(error)
+        console.error("failed =(");
       })
 
     }
