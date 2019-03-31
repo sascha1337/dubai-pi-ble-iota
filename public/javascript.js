@@ -75,9 +75,9 @@ function setup_sockets(){
             $(".status_parking").empty().append("<i>Not occupied</i>").css("color","orange");
             $(".realtime").empty().append("idle");
 
-            setInterval(function(){
+            setTimeout(function(){
                 $(".parking_duration").empty().append(hhmmss(0));
-            }, 3000);
+            }, 5000);
             
         }
     })
