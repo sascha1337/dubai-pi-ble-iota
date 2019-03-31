@@ -59,9 +59,9 @@ function setup_sockets(){
 
     socket_station.on('status', function (msg) {
         // $('.status').empty().append(msg);
-        console.log(":::status:::", msg);
-
+        
         if(msg.type == "parking_start") {
+            console.log(":::parking_start:::", msg);
             $(".status_car").empty().append(wrapRipple("Status: Parking")).css("color","lime");
             $(".status_parking").empty().append(wrapRipple("Car is parking")).css("color","lime");
         }
@@ -71,13 +71,18 @@ function setup_sockets(){
         }
 
         if(msg.type == "parking_done"){
+
+            console.log(":::parking_done:::", msg);
+
             $(".status_car").empty().append("Status: Driving").css("color","white");
             $(".status_parking").empty().append("<i>Not occupied</i>").css("color","orange");
             $(".realtime").empty().append("idle");
 
             setTimeout(function(){
                 $(".parking_duration").empty().append(hhmmss(0));
-            }, 5000);
+                // balance and ui update 
+                
+            }, 3000);
             
         }
     })
