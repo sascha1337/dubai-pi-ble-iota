@@ -7,7 +7,7 @@ var socket_station;
 var socket;
 
 var ust_to_aed = 3.67250;
-var kf = new KalmanFilter({R: 0.8, Q: 20});
+var kf = new KalmanFilter({R: 0.9, Q: 40});
 
 // broadcast_status({type:"parking_start"});
 // broadcast_status({type:"parking_duration", parkingSeconds
