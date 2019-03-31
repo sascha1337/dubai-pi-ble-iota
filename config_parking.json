@@ -10,6 +10,6 @@
     "ble_uuid": "13373eed5bb3489e81ac6d052d8cf93b",
     "iota_wallet_seed_old": "AKITAPIZWEIAHAFDHADGHADHRGVFVVRGRBARMWOWQSKQEOFVDMWFBNMMCNVEDVFEDSDGGAGGDFREWOQWX",
     "iota_wallet_seed": "AKITAPIZWEIPARKINGDGHADHRGVFVVRGRBARMWOWQSKQEOFVDMWFBNMMCNVEDVFEDSDGGAGGDFREWOQWX",
-    "parking_rssi_start": -44,
-    "parking_rssi_end": -60
+    "parking_rssi_start": -35,
+    "parking_rssi_end": -50
 }
