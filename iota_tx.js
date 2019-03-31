@@ -10,7 +10,7 @@ var cached_parking_addr = "";
 
 setTimeout(() => {
     nodeInfo();
-},3000);
+},500);
 
 function nodeInfo(){
     return new Promise((resolve, reject) => {
@@ -71,7 +71,7 @@ function makeTx(seed, addr, duration, cost) {
         iota.api.sendTransfer(seed, 3, 14, transfers, (err,dat) => {
             if(!err) {
                 console.log("::IOTA:: TX sent");
-                console.log(dat.bundle[0].hash);
+                // console.log(dat.bundle[0].hash);
                 resolve(dat);
             } else {
                 console.log("ERROR:", err);
