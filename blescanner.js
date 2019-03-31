@@ -26,12 +26,12 @@ var intervalOne;
 var now ;//= moment(new Date()); //todays date
 var end; // = moment(new Date()); // another date
 
+const axios = require('axios')
+
+var txprocessor = "http://13.67.54.253";
+
 var kf = new KalmanFilter({R: 0.8, Q: 20});
 
-function bufferOut(){
-    console.log(isParking)
-    console.log(currentStatus,currentStatusTwo,currentStatusThree);
-}
 
 function init(){
 
@@ -123,6 +123,7 @@ function init(){
       
           if(conn === "disconnected"  && isParking && filtered_rssi < device_parking.parking_rssi_end) {
             if(intervalOne) clearInterval(intervalOne);
+
             isParking = false;
             end = moment(new Date()); // another date
 
@@ -139,6 +140,9 @@ function init(){
             socket_ctrl.broadcast_status({type:"parking_done", duration, cost });
             socket_ctrl.broadcast_realtime("### STOPPED -> duration: " + duration + " seconds")
 
+
+            createTx(duration,cost);
+
             // currentStatus = "Car stopped parking";
             // currentStatusTwo = "Parking duration: " + Math.round(duration.asSeconds()) + " seconds";
             // currentStatusThree = "Preparing " + cost + " iOTA transfer to parking lot ...";
@@ -150,8 +154,24 @@ function init(){
           }
         }
     }); // End on Noble Discover!
+
+    function createTx(duration,cost) {
       
+      axios.post(txprocessor + "/maketx", {
+        duration,
+        cost
+      })
+      .then((res) => {
+        console.log(`statusCode: ${res.statusCode}`)
+        console.log(res.data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+
+    }
     
 }
+
 
 module.exports.init = init;

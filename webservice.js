@@ -1,5 +1,5 @@
-const server = require('server');
 const socket_ctrl = require("./socket_controller");
+const server = require('server');
 const request = require("request");
 
 var os = require( 'os' );
