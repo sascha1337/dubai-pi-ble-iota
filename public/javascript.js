@@ -17,8 +17,6 @@ var station_balance_aed = 0;
 // broadcast_status({type:"parking_duration", parkingSeconds
 // broadcast_status({type:"parking_done", duration, cost });
 
-
-
 function wrapRipple(msg){
     return '<div class="lds-ripple float-left"><div></div><div></div></div> ' + msg + ' <div class="lds-ripple float-right"><div></div><div></div></div>';
 }
@@ -32,7 +30,7 @@ function getHistory(){
         console.log("HISTORY", dat);
         dat.transactions.forEach(tx => {
             if(tx.status !== "reattachmentConfirmed")
-                $(".history").prepend(wrapLi(1,2,tx.hash));
+                $(".history").prepend(wrapLi(120,120,tx.hash));
         });
     });
 }
