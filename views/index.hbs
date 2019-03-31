@@ -82,14 +82,14 @@
 
                       <b>Balance</b> 
                     </li>
-                    <li class="list-group-item"><b>1.000,00</b> AED</li>
-                    <li class="list-group-item akita-pink"><b>972 mIOTA</b></li>
-                    <li class="list-group-item"><b>272,25 </b>USD</li>
+                    <li class="list-group-item"><b class="balance_aed">1000</b> AED</li>
+                    <li class="list-group-item akita-pink"><b class="balance_iota">972</b> mIOTA</li>
+                    <li class="list-group-item"><b class="balance_usd">272,25</b> USD</li>
                 </div>
                 <div class="col-md-8">
                   <ul class="list-group text-center" style="font-size:2.5em">
                     {{#if device.car }}
-                      <li class="list-group-item"><span class="status_car">Status: DRIVING</span></li>
+                      <li class="list-group-item"><span class="status_car" style="color:orange">Status: DRIVING</span></li>
                       <li class="list-group-item"><b>@Dubai Future Blockchain Summit</b></li>
                       <li class="list-group-item"><b>Parking Duration:</b></li>
                       <li class="list-group-item akita-pink"><b><span class="parking_duration">00:00:00</span></b></li>
@@ -107,16 +107,11 @@
             </div>
             <div class="tab-pane fade" id="pills-history" role="tabpanel" aria-labelledby="pills-history-tab">
               <h4>IOTA Transaction History</h4>
-              <ul class="list-group" style="font-size:1.4em">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <span>Parking duration 12 min</span> 
-                  <small class="mute">
-                    <a href="https://thetangle.org/transaction/EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZVQOGMB9XVNUZVXEVVNLDROMSVQBGPHEKEOA9999">EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZ...</a>
-                  </small>
-                  <span class="badge badge-primary badge-pill float-right">Sent 53 IOTA</span>
-                  
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+              <ul class="list-group history" style="font-size:1.4em">
+                
+                {{!-- <li class="list-group-item d-flex justify-content-between align-items-center"><span>Parking duration 12 min</span> <small class="mute"><a href="https://thetangle.org/transaction/">ABC...</a></small><span class="badge badge-primary badge-pill float-right">Sent 53 IOTA</span></li> --}}
+                
+                {{!-- <li class="list-group-item d-flex justify-content-between align-items-center">
                   Parking duration 60 min
                   <small class="mute">
                     <a href="https://thetangle.org/transaction/IKIEIHJMPNIYWRAMNTGCZRTSUCINCS9GYWEDTIJDHHLJUCVGLQOJRX9QAOMUJVAJJZNFFCEJXNRFZ9999">IKIEIHJMPNIYWRAMNTGCZRTSUCINCS9GYWEDTIJDHHLJ...</a>
@@ -143,7 +138,7 @@
                     <a href="https://thetangle.org/transaction/EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZVQOGMB9XVNUZVXEVVNLDROMSVQBGPHEKEOA9999">EDQEKTYWFMNYIDRPCNUGRZWCBNMWVMVIKINTLZWBJZ...</a>
                   </small>
                   <span class="badge badge-primary badge-pill float-right">Sent 523 IOTA</span>
-                </li>
+                </li> --}}
               </ul>
             </div>
             <div class="tab-pane fade" id="pills-debug" role="tabpanel" aria-labelledby="pills-debug-tab">

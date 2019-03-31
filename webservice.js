@@ -1,6 +1,8 @@
 const socket_ctrl = require("./socket_controller");
 const server = require('server');
 const request = require("request");
+const IOTA = require("iota.lib.js");
+const iota = new IOTA();
 
 var os = require( 'os' );
 var ip = require('ip');
@@ -35,6 +37,8 @@ function init(config){
         get('/device', getDeviceInfo),
         get('/device_list', getDeviceList),
         get("/prices", getPrices),
+        get("/history", getHistoryJson),
+        get("/getTxInfo", getTxInfo),
         // post('/maketx', ctx => {
         //     console.log(ctx.data);
         //     json(ctx.data)
@@ -45,6 +49,57 @@ function init(config){
         get(ctx => status(404)),
         error(ctx => status(500).send(ctx.error.message))
     ]);
+
+    async function getHistoryJson(){
+        var mox = await getHistory();
+        return json(mox);
+    }
+
+    async function getTxInfo(ctx){
+        console.log(ctx.query);
+        var mox = await getTx(ctx.query.hash);
+        return json(mox);
+    }
+
+    function getTx(hash) {
+        return new Promise((resolve, reject) => {
+            request.get("https://api.thetangle.org/transactions/" + hash, (a,b,c) => {
+                var xoxo = JSON.parse(c);
+                console.log(xoxo.signature);
+                
+                var datz = iota.utils.fromTrytes(xoxo.signature);
+                console.log(datz);
+                resolve(datz);
+            });
+        });
+
+    }
+
+    function getHistory(){
+        return new Promise((resolve, reject) => {
+            request.get("https://api.thetangle.org/addresses/CANYJOCS9WFPIVRGYZC9IRDNFNXBCQHUZMUGTNYLYVYRJDYDZO9YYBYIHDEBFRQSBXOTCGMYWGRGKRLNA",(a,b,c) => {
+                if(!a){
+                    var dat;
+                    try {
+                        dat = JSON.parse(c);
+
+                        // dat.transactions.map((tx) => {
+                        // });
+
+                        resolve(dat);
+                        
+                    } catch(ex) {
+                        resolve();
+                    }
+                }else{
+                    console.log("HISTORY ERROR");
+                    resolve();
+                }
+            });
+
+        });
+    }
+
     
     function getIOTAprice(){
         return new Promise((resolve, reject) => {

@@ -1,3 +1,4 @@
+
 var device;
 var device_list;
 
@@ -9,12 +10,29 @@ var socket;
 var ust_to_aed = 3.67250;
 var kf = new KalmanFilter({R: 0.8, Q: 5});
 
+var car_balance_aed = 1000;
+var station_balance_aed = 0;
+
 // broadcast_status({type:"parking_start"});
 // broadcast_status({type:"parking_duration", parkingSeconds
 // broadcast_status({type:"parking_done", duration, cost });
 
 function wrapRipple(msg){
     return '<div class="lds-ripple float-left"><div></div><div></div></div> ' + msg + ' <div class="lds-ripple float-right"><div></div><div></div></div>';
+}
+
+function wrapLi(duration,cost,hash) {
+    return '<li class="list-group-item d-flex justify-content-between align-items-center"><span>Parking duration: ' + duration + ' seconds</span> <small class="mute"><a href="https://thetangle.org/transaction/' + hash + '">' + hash.substr(0,30) + '...</a></small><span class="badge badge-primary badge-pill float-right">' + cost + ' IOTA</span></li>';
+}
+
+function getHistory(){
+    $.get("http://localhost:3000/history", (dat) => {
+        console.log("HISTORY", dat);
+        dat.transactions.forEach(tx => {
+            if(tx.status !== "reattachmentConfirmed")
+                $(".history").prepend(wrapLi(1,2,tx.hash));
+        });
+    });
 }
 
 function setup_sockets(){
@@ -74,14 +92,41 @@ function setup_sockets(){
 
             console.log(":::parking_done:::", msg);
 
-            $(".status_car").empty().append("Status: Driving").css("color","white");
+            $(".status_car").empty().append("Status: Driving").css("color","orange");
             $(".status_parking").empty().append("<i>Not occupied</i>").css("color","orange");
             $(".realtime").empty().append("idle");
+
+            if(device.car){
+
+                var x = car_balance_aed - (msg.duration);
+                car_balance_aed = x;
+
+                $(".balance_aed").empty().append(car_balance_aed.toFixed(2));
+                
+                var new_usd_balance = (car_balance_aed * 0.27);
+                var new_iota_balance = new_usd_balance * 3.2711;
+
+                $(".balance_iota").empty().append(new_iota_balance.toFixed(2));
+                $(".balance_usd").empty().append(new_usd_balance.toFixed(2));
+
+            }
+
+            if(device.station) {
+
+                var x = station_balance_aed + (msg.duration);
+                station_balance_aed = x;
+                $(".balance_aed").empty().append(station_balance_aed);
+
+                var new_usd_balance = (car_balance_aed * 0.27);
+                var new_iota_balance = new_usd_balance * 3.2711;
+
+                $(".balance_iota").empty().append(new_iota_balance.toFixed(2));
+                $(".balance_usd").empty().append(new_usd_balance.toFixed(2));
+            }
 
             setTimeout(function(){
                 $(".parking_duration").empty().append(hhmmss(0));
                 // balance and ui update 
-                
             }, 3000);
             
         }
@@ -111,6 +156,8 @@ $(function(){
             // socket_gov = io("http://" + device_list.gov.zerotier_ip_dev + ":3000");
             
             setup_sockets();
+
+            getHistory();
 
             // if(device.car){
             //     socket_car = io("http://" + device_list.car.zerotier_ip_dev + ":3000");
