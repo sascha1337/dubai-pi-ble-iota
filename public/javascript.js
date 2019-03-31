@@ -17,33 +17,7 @@ var station_balance_aed = 0;
 // broadcast_status({type:"parking_duration", parkingSeconds
 // broadcast_status({type:"parking_done", duration, cost });
 
-if(device.car){
 
-    var x = car_balance_aed;
-    car_balance_aed = x;
-
-    $(".balance_aed").empty().append(car_balance_aed.toFixed(2));
-    
-    var new_usd_balance = (car_balance_aed * 0.27);
-    var new_iota_balance = new_usd_balance * 3.2711;
-
-    $(".balance_iota").empty().append(new_iota_balance.toFixed(2));
-    $(".balance_usd").empty().append(new_usd_balance.toFixed(2));
-
-}
-
-if(device.station) {
-
-    var x = station_balance_aed;
-    station_balance_aed = x;
-    $(".balance_aed").empty().append(station_balance_aed.toFixed(2));
-    
-    var new_usd_balance = (car_balance_aed * 0.27);
-    var new_iota_balance = new_usd_balance * 3.2711;
-
-    $(".balance_iota").empty().append(new_iota_balance.toFixed(2));
-    $(".balance_usd").empty().append(new_usd_balance.toFixed(2));
-}
 
 function wrapRipple(msg){
     return '<div class="lds-ripple float-left"><div></div><div></div></div> ' + msg + ' <div class="lds-ripple float-right"><div></div><div></div></div>';
@@ -173,6 +147,34 @@ $(function(){
 
         console.log("DEVICE:", data);
         device = data;
+
+        if(device.car){
+
+            var x = car_balance_aed;
+            car_balance_aed = x;
+        
+            $(".balance_aed").empty().append(car_balance_aed.toFixed(2));
+            
+            var new_usd_balance = (car_balance_aed * 0.27);
+            var new_iota_balance = new_usd_balance * 3.2711;
+        
+            $(".balance_iota").empty().append(new_iota_balance.toFixed(2));
+            $(".balance_usd").empty().append(new_usd_balance.toFixed(2));
+        
+        }
+        
+        if(device.station) {
+        
+            var x = station_balance_aed;
+            station_balance_aed = x;
+            $(".balance_aed").empty().append(station_balance_aed.toFixed(2));
+            
+            var new_usd_balance = (car_balance_aed * 0.27);
+            var new_iota_balance = new_usd_balance * 3.2711;
+        
+            $(".balance_iota").empty().append(new_iota_balance.toFixed(2));
+            $(".balance_usd").empty().append(new_usd_balance.toFixed(2));
+        }
 
         $.get("http://localhost:3000/device_list", function(list){
             
