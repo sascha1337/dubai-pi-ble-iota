@@ -100,6 +100,7 @@ function setup_sockets(){
         }
         
         if(msg.type == "tx_done"){
+            console.log("TX DONE", msg);
             $(".tx_pending").html(msg.tx[0].hash).attr("href","https://thetangle.org/transaction/" + msg.tx[0].hash);
         }
 
