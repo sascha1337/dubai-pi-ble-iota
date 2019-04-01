@@ -160,12 +160,13 @@ function init(){
         cost
       })
       .then((res) => {
+        console.log("TX !!!!");
         // console.log(`statusCode: ${res.statusCode}`)
-        socket_ctrl.broadcast_status({type:"tx", duration, cost, tx:res.data});
+        socket_ctrl.broadcast_status({type:"tx_done", duration, cost, tx:res.data});
         console.log(res.data)
       })
       .catch((error) => {
-        console.error("failed =(");
+        console.error("TX result failed =(");
       })
 
     }

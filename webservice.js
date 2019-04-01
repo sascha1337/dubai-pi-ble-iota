@@ -77,7 +77,7 @@ function init(config){
 
     function getHistory(){
         return new Promise((resolve, reject) => {
-            request.get("https://api.thetangle.org/addresses/CANYJOCS9WFPIVRGYZC9IRDNFNXBCQHUZMUGTNYLYVYRJDYDZO9YYBYIHDEBFRQSBXOTCGMYWGRGKRLNA",(a,b,c) => {
+            request.get("https://api.thetangle.org/addresses/BJR9ZXCNLTAVBPJHEFCSQSVIAPXLUCTFATRMAUDGDORAXHNRPZJASDTUJCVVASCWP9KNWPZKPDLEGBWW9",(a,b,c) => {
                 if(!a){
                     var dat;
                     try {

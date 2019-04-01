@@ -22,7 +22,11 @@ function wrapRipple(msg){
 }
 
 function wrapLi(duration,cost,hash) {
-    return '<li class="list-group-item d-flex justify-content-between align-items-center"><span>Parking duration: ' + duration + ' seconds</span> <small class="mute"><a href="https://thetangle.org/transaction/' + hash + '">' + hash.substr(0,30) + '...</a></small><span class="badge badge-primary badge-pill float-right">' + cost + ' IOTA</span></li>';
+    return '<li class="list-group-item d-flex justify-content-between align-items-center"><span>Parking duration: ' + duration + ' seconds</span> <small class="mute"><a target="_blank" href="https://thetangle.org/transaction/' + hash + '">' + hash.substr(0,30) + '...</a></small><span class="badge badge-primary badge-pill float-right">' + cost + ' IOTA</span></li>';
+}
+
+function wrapLiPending(duration,cost) {
+    return '<li class="list-group-item d-flex justify-content-between align-items-center"><span>Parking duration: ' + duration + ' seconds</span> <small class="mute"><a target="_blank" class="tx_pending" href="https://thetangle.org/transaction/">' + wrapRipple("pending...") + '...</a></small><span class="badge badge-primary badge-pill float-right">' + cost + ' IOTA</span></li>';
 }
 
 function getHistory(){
@@ -30,7 +34,7 @@ function getHistory(){
         console.log("HISTORY", dat);
         dat.transactions.forEach(tx => {
             if(tx.status !== "reattachmentConfirmed")
-                $(".history").prepend(wrapLi(120,120,tx.hash));
+                $(".history").prepend(wrapLi(120,120,tx.hash, tx.timestamp));
         });
     });
 }
@@ -94,6 +98,10 @@ function setup_sockets(){
         if(msg.type == "parking_duration"){
             $(".parking_duration").empty().append(hhmmss(msg.parkingSeconds));
         }
+        
+        if(msg.type == "tx_done"){
+            $(".tx_pending").html(msg.tx[0].hash).attr("href","https://thetangle.org/transaction/" + msg.tx[0].hash);
+        }
 
         if(msg.type == "parking_done"){
 
@@ -130,6 +138,8 @@ function setup_sockets(){
                 $(".balance_iota").empty().append(new_iota_balance.toFixed(2));
                 $(".balance_usd").empty().append(new_usd_balance.toFixed(2));
             }
+
+            $(".history").prepend(wrapLiPending(msg.duration,msg.duration));
 
             setTimeout(function(){
                 $(".parking_duration").empty().append(hhmmss(0));
