@@ -30,7 +30,7 @@ function wrapLiPending(duration,cost) {
 }
 
 function getHistory(){
-    $.get("http://" + document.domain + ":3000/history", (dat) => {
+    $.get("http://13.67.54.253/history", (dat) => {
         console.log("HISTORY", dat);
         dat.transactions.forEach(tx => {
             // if(tx.status !== "reattachmentConfirmed")
@@ -101,7 +101,7 @@ function setup_sockets(){
         
         if(msg.type == "tx_done"){
             console.log("TX DONE", msg);
-            $(".tx_pending").html(msg.tx[0].hash).attr("href","https://thetangle.org/transaction/" + msg.tx[0].hash.substr(0,30));
+            $(".tx_pending").html(msg.tx[0].hash.substr(0,30)).attr("href","https://thetangle.org/transaction/" + msg.tx[0].hash);
         }
 
         if(msg.type == "parking_done"){
