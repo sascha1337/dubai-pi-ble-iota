@@ -30,7 +30,7 @@ function wrapLiPending(duration,cost) {
 }
 
 function getHistory(){
-    $.get("http://localhost:3000/history", (dat) => {
+    $.get("http://" + document.domain + ":3000/history", (dat) => {
         console.log("HISTORY", dat);
         dat.transactions.forEach(tx => {
             if(tx.status !== "reattachmentConfirmed")
@@ -159,7 +159,7 @@ var prices = {
 
 $(function(){
 
-    $.get("http://localhost:3000/device", function(data) {
+    $.get("http://" + document.domain + ":3000/device", function(data) {
 
         console.log("DEVICE:", data);
         device = data;
@@ -192,7 +192,7 @@ $(function(){
             $(".balance_usd").empty().append(new_usd_balance.toFixed(2));
         }
 
-        $.get("http://localhost:3000/device_list", function(list){
+        $.get("http://" + document.domain + ":3000/device_list", function(list){
             
             console.log("DEVICE LIST:", list);
             device_list = list;
@@ -222,7 +222,7 @@ $(function(){
 
     setInterval(function() {
         // console.log("fetch prices");
-        $.get("http://localhost:3000/prices", function(data){
+        $.get("http://" + document.domain + ":3000/prices", function(data){
             // console.log(data);
             prices = data;
         });
