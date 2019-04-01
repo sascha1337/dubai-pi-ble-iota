@@ -2,10 +2,12 @@ const socket_ctrl = require("./socket_controller");
 const server = require('server');
 const request = require("request");
 const IOTA = require("iota.lib.js");
-const iota = new IOTA();
+const iota = new IOTA({'provider': 'http://node.deviceproof.org:14265'});
 
 var os = require( 'os' );
 var ip = require('ip');
+
+var axios = require("axios");
 
 // const device = require("./config");
 
@@ -51,8 +53,8 @@ function init(config){
     ]);
 
     async function getHistoryJson(){
-        var mox = await getHistory();
-        return json(mox);
+        var mox = await newHistory();
+        return json({transactions:mox});
     }
 
     async function getTxInfo(ctx){
@@ -64,27 +66,72 @@ function init(config){
     function getTx(hash) {
         return new Promise((resolve, reject) => {
             request.get("https://api.thetangle.org/transactions/" + hash, (a,b,c) => {
-                var xoxo = JSON.parse(c);
-                console.log(xoxo.signature);
-                
-                var datz = iota.utils.fromTrytes(xoxo.signature);
-                console.log(datz);
-                resolve(datz);
+                try{
+                    var xoxo = JSON.parse(c);
+                    var strip = xoxo.signature.substr(0,xoxo.signature.indexOf("9"));
+                    var datz = JSON.parse(iota.utils.fromTrytes(strip));
+                    console.log(datz);
+                    resolve(datz);
+
+                }catch(ex){
+                    console.log(hash,c);
+                    resolve({});
+                }
             });
         });
 
     }
 
+    function newHistory() {
+        return new Promise((resolve, reject) => {
+            iota.api.findTransactionObjects({addresses:["RAXOAGQZHHPTMZPRCOPIBZFGHPOAFLXNWRCOSIGBQUFCZIGOKMODWOSLAZK9JCGHLLOYGUJPYFBXMOHJBAOWMMY9YC"]},(err,txs) => {
+                console.log(err);
+    
+                var newTxArray = [];
+    
+                const mapz = txs.map( tx => {
+                    return new Promise((resolver, rejectr) => {
+                        iota.api.getBundle(tx.hash, (errx,datz) => {
+                            // console.log(errx,datz);
+                            var res = JSON.parse(iota.utils.extractJson(datz));
+                            // console.log(res);
+                            newTxArray.push(Object.assign(tx, {data: res}));
+                            resolver(res);
+                        });
+                    });
+                });
+    
+                Promise.all(mapz).then(() => {
+                    // console.log(newTxArray);
+                    resolve(newTxArray);;
+                }); 
+
+            });
+        
+
+        });
+    }
+
     function getHistory(){
         return new Promise((resolve, reject) => {
-            request.get("https://api.thetangle.org/addresses/BJR9ZXCNLTAVBPJHEFCSQSVIAPXLUCTFATRMAUDGDORAXHNRPZJASDTUJCVVASCWP9KNWPZKPDLEGBWW9",(a,b,c) => {
+            request.get("https://api.thetangle.org/addresses/BJR9ZXCNLTAVBPJHEFCSQSVIAPXLUCTFATRMAUDGDORAXHNRPZJASDTUJCVVASCWP9KNWPZKPDLEGBWW9FLJPRYMCW",(a,b,c) => {
                 if(!a){
                     var dat;
                     try {
                         dat = JSON.parse(c);
-
                         // dat.transactions.map((tx) => {
                         // });
+
+                        var newTxArray = [];
+
+                        dat.transactions.forEach(async (tx) => {
+                            // console.log(tx.hash);
+                            var resolved = await getTx(tx.hash);
+                            tx.resolved = resolved;
+                            newTxArray.push(Object.assign({}, tx, {data: resolved}));
+                        });
+
+                        // dat.transactions = newTxArray;
 
                         resolve(dat);
                         

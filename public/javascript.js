@@ -33,8 +33,8 @@ function getHistory(){
     $.get("http://" + document.domain + ":3000/history", (dat) => {
         console.log("HISTORY", dat);
         dat.transactions.forEach(tx => {
-            if(tx.status !== "reattachmentConfirmed")
-                $(".history").prepend(wrapLi(120,120,tx.hash, tx.timestamp));
+            // if(tx.status !== "reattachmentConfirmed")
+            $(".history").prepend(wrapLi(tx.data.duration,tx.data.cost,tx.hash, tx.timestamp));
         });
     });
 }
@@ -101,7 +101,7 @@ function setup_sockets(){
         
         if(msg.type == "tx_done"){
             console.log("TX DONE", msg);
-            $(".tx_pending").html(msg.tx[0].hash).attr("href","https://thetangle.org/transaction/" + msg.tx[0].hash);
+            $(".tx_pending").html(msg.tx[0].hash).attr("href","https://thetangle.org/transaction/" + msg.tx[0].hash.substr(0,30));
         }
 
         if(msg.type == "parking_done"){
@@ -203,7 +203,7 @@ $(function(){
             
             setup_sockets();
             getHistory();
-
+            
             // if(device.car){
             //     socket_car = io("http://" + device_list.car.zerotier_ip_dev + ":3000");
             //     socket_station = io("http://" + device_list.station.zerotier_ip_dev + ":3000");
@@ -218,8 +218,7 @@ $(function(){
             // }
         });
     });
-
-
+    
     setInterval(function() {
         // console.log("fetch prices");
         $.get("http://" + document.domain + ":3000/prices", function(data){
