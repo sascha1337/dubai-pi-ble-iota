@@ -2,6 +2,7 @@ const socket_ctrl = require("./socket_controller");
 const server = require('server');
 const request = require("request");
 const IOTA = require("iota.lib.js");
+
 const iota = new IOTA({'provider': 'http://node.deviceproof.org:14265'});
 
 var os = require( 'os' );
@@ -89,7 +90,7 @@ function init(config){
 
     function newHistory() {
         return new Promise((resolve, reject) => {
-            iota.api.findTransactionObjects({addresses:["9QVQIMAIVMDXMLTMGERL9UWKRG9LUAIRNOHRMVABPWARXJZHGMJCTTVCJAQATURWONRBJWDVIZVOZUPJCHZPEEURFZ"]},(err,txs) => {
+            iota.api.findTransactionObjects({addresses:["LRVDMZNKCWEZGDRQCPHVFSJEHPJSHYFXDNODIKLQHCQWNDLIYISGNVCAGTXE9S9SSAIDVIROEYTEACVU9XVSXNL9TD"]},(err,txs) => {
                 console.log(err);
                 
                 var filtered = _.orderBy(txs, ["timestamp"], ['desc']);
@@ -122,7 +123,7 @@ function init(config){
 
     function getHistory(){
         return new Promise((resolve, reject) => {
-            request.get("https://api.thetangle.org/addresses/BJR9ZXCNLTAVBPJHEFCSQSVIAPXLUCTFATRMAUDGDORAXHNRPZJASDTUJCVVASCWP9KNWPZKPDLEGBWW9FLJPRYMCW",(a,b,c) => {
+            request.get("https://api.thetangle.org/addresses/LRVDMZNKCWEZGDRQCPHVFSJEHPJSHYFXDNODIKLQHCQWNDLIYISGNVCAGTXE9S9SSAIDVIROEYTEACVU9XVSXNL9TD",(a,b,c) => {
                 if(!a){
                     var dat;
                     try {
