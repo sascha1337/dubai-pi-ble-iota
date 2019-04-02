@@ -218,7 +218,7 @@ $(function(){
             device_list = list;
             
             // socket_car = io("http://" + device_list.car.zerotier_ip_dev + ":3000");
-            socket_station = io("http://" + device_list.station.zerotier_ip + ":3000");
+            socket_station = io("http://" + device_list.station.zerotier_ip_dev + ":3000");
             // socket_gov = io("http://" + device_list.gov.zerotier_ip_dev + ":3000");
             
             setup_sockets();
