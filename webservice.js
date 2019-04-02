@@ -9,6 +9,8 @@ var ip = require('ip');
 
 var axios = require("axios");
 
+var _ = require("lodash");
+
 // const device = require("./config");
 
 function init(config){
