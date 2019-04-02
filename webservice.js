@@ -107,7 +107,7 @@ function init(config){
                 });
     
                 Promise.all(mapz).then(() => {
-                    console.log(newTxArray);
+                    // console.log(newTxArray);
                     resolve(newTxArray);
                 }); 
     
