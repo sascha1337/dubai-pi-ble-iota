@@ -13,6 +13,8 @@ var _ = require("lodash");
 
 // const device = require("./config");
 
+
+
 function init(config){
     
     var networkInterfaces = os.networkInterfaces( );
@@ -31,8 +33,9 @@ function init(config){
     const cors = [
         ctx => header("Access-Control-Allow-Origin", "*"),
         ctx => header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"),
-        ctx => ctx.method.toLowerCase() === 'options' ? 200 : false
-      ];
+        ctx => ctx.method.toLowerCase() === 'options' ? 200 : false,
+        ctx => {ctx.server.timeout = 800000}
+    ];
       
     server(security, cors, [
         get('/', getDashboard),
@@ -187,7 +190,7 @@ function init(config){
     //     });
     // }
     
-    async function getPrices(){
+    async function getPrices(ctx){
         var iotaprice = await getIOTAprice();
         // var aedprice = await getAEDprice();
         return json({iota_usd: iotaprice.USD, iota_aed: iotaprice.USD * 3.67, aed:3.67 });
