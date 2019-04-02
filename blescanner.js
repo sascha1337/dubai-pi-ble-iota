@@ -28,6 +28,8 @@ var end; // = moment(new Date()); // another date
 
 const axios = require('axios')
 
+axios.defaults.timeout = 600000;
+
 var txprocessor = "http://13.67.54.253";
 
 var kf = new KalmanFilter({R: 0.8, Q: 5});
