@@ -39,7 +39,7 @@ function wrapLiPending(duration,cost) {
 
 function getHistory(){
     
-    $.get("http://13.67.54.253/history", (dat) => {
+    $.get("http://"  + document.domain + ":3000/history", (dat) => {
         console.log("HISTORY", dat);
 
         dat.transactions.sort(function(x, y){
