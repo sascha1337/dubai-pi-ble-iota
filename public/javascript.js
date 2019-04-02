@@ -17,21 +17,34 @@ var station_balance_aed = 0;
 // broadcast_status({type:"parking_duration", parkingSeconds
 // broadcast_status({type:"parking_done", duration, cost });
 
+setInterval(() => {
+    $(".stamper").each((i,dat) => {
+        var check = $(dat).data("stamp");
+        if(check)
+            $(dat).html(moment.unix($(dat).data("stamp")).fromNow());
+    });
+},3000);
+
 function wrapRipple(msg){
     return '<div class="lds-ripple float-left"><div></div><div></div></div> ' + msg + ' <div class="lds-ripple float-right"><div></div><div></div></div>';
 }
 
-function wrapLi(duration,cost,hash) {
-    return '<li class="list-group-item d-flex justify-content-between align-items-center"><span>Parking duration: ' + duration + ' seconds</span> <small class="mute"><a target="_blank" href="https://thetangle.org/transaction/' + hash + '">' + hash.substr(0,30) + '...</a></small><span class="badge badge-primary badge-pill float-right">' + cost + ' IOTA</span></li>';
+function wrapLi(duration,cost,hash, timestamp) {
+    return '<li class="list-group-item d-flex justify-content-between align-items-center"><span>Duration: ' + duration + ' seconds</span> <span data-stamp="' + timestamp + '" class="stamper">' + moment.unix(timestamp).fromNow() + '</span> <small class="mute"><a target="_blank" href="https://thetangle.org/transaction/' + hash + '">' + hash.substr(0,30) + '...</a></small><span class="badge badge-primary badge-pill float-right">' + cost + ' IOTA</span></li>';
 }
 
 function wrapLiPending(duration,cost) {
-    return '<li class="list-group-item d-flex justify-content-between align-items-center"><span>Parking duration: ' + duration + ' seconds</span> <small class="mute"><a target="_blank" class="tx_pending" href="https://thetangle.org/transaction/">' + wrapRipple("pending...") + '...</a></small><span class="badge badge-primary badge-pill float-right">' + cost + ' IOTA</span></li>';
+    return '<li class="list-group-item d-flex justify-content-between align-items-center"><span>Duration: ' + duration + ' seconds</span> <span data-stamp="" class="stamper myago"></span> <small class="mute"><a target="_blank" class="tx_pending" href="https://thetangle.org/transaction/">' + wrapRipple("pending...") + '...</a></small><span class="badge badge-primary badge-pill float-right">' + cost + ' IOTA</span></li>';
 }
 
 function getHistory(){
     $.get("http://13.67.54.253/history", (dat) => {
         console.log("HISTORY", dat);
+
+        dat.transactions.sort(function(x, y){
+            return x.timestamp - y.timestamp;
+        })
+
         dat.transactions.forEach(tx => {
             // if(tx.status !== "reattachmentConfirmed")
             $(".history").prepend(wrapLi(tx.data.duration,tx.data.cost,tx.hash, tx.timestamp));
@@ -82,7 +95,7 @@ function setup_sockets(){
     socket_station.on('tx', (data) => {
         
         console.log(data);
-        $(".history").prepend(wrapLi(data.duration,data.cost,data.tx[0].hash));
+        $(".history").prepend(wrapLi(data.duration,data.cost,data.tx[0].hash, data.tx[0].timestamp));
 
     });
     
@@ -102,6 +115,9 @@ function setup_sockets(){
         if(msg.type == "tx_done"){
             console.log("TX DONE", msg);
             $(".tx_pending").html(msg.tx[0].hash.substr(0,30)).attr("href","https://thetangle.org/transaction/" + msg.tx[0].hash);
+            $(".tx_pending").removeClass("tx_pending");
+            $(".myago").html(moment.unix(msg.tx[0].timestamp).fromNow());
+            $(".myago").removeClass("myago")
         }
 
         if(msg.type == "parking_done"){
