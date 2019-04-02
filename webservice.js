@@ -84,12 +84,15 @@ function init(config){
 
     function newHistory() {
         return new Promise((resolve, reject) => {
-            iota.api.findTransactionObjects({addresses:["RAXOAGQZHHPTMZPRCOPIBZFGHPOAFLXNWRCOSIGBQUFCZIGOKMODWOSLAZK9JCGHLLOYGUJPYFBXMOHJBAOWMMY9YC"]},(err,txs) => {
+            iota.api.findTransactionObjects({addresses:["9QVQIMAIVMDXMLTMGERL9UWKRG9LUAIRNOHRMVABPWARXJZHGMJCTTVCJAQATURWONRBJWDVIZVOZUPJCHZPEEURFZ"]},(err,txs) => {
                 console.log(err);
+                
+                var filtered = _.orderBy(txs, ["timestamp"], ['desc']);
+                var filter2 = _.uniqBy(filtered, 'bundle');
     
                 var newTxArray = [];
     
-                const mapz = txs.map( tx => {
+                const mapz = filter2.map( tx => {
                     return new Promise((resolver, rejectr) => {
                         iota.api.getBundle(tx.hash, (errx,datz) => {
                             // console.log(errx,datz);
@@ -102,13 +105,13 @@ function init(config){
                 });
     
                 Promise.all(mapz).then(() => {
-                    // console.log(newTxArray);
-                    resolve(newTxArray);;
+                    console.log(newTxArray);
+                    resolve(newTxArray);
                 }); 
-
+    
             });
         
-
+    
         });
     }
 

@@ -38,6 +38,7 @@ function wrapLiPending(duration,cost) {
 }
 
 function getHistory(){
+    
     $.get("http://13.67.54.253/history", (dat) => {
         console.log("HISTORY", dat);
 
@@ -116,7 +117,10 @@ function setup_sockets(){
             console.log("TX DONE", msg);
             $(".tx_pending").html(msg.tx[0].hash.substr(0,30)).attr("href","https://thetangle.org/transaction/" + msg.tx[0].hash);
             $(".tx_pending").removeClass("tx_pending");
+            
             $(".myago").html(moment.unix(msg.tx[0].timestamp).fromNow());
+            $(".myago").data("stamp",msg.tx[0].timestamp);
+
             $(".myago").removeClass("myago")
         }
 
