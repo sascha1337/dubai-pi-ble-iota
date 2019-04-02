@@ -168,7 +168,7 @@ function init(){
         console.log(res.data)
       })
       .catch((error) => {
-        console.error("TX result failed =(");
+        console.error("TX result failed =(", error);
       })
 
     }
