@@ -95,7 +95,7 @@ function init(config){
 
     function newHistory() {
         return new Promise((resolve, reject) => {
-            iota.api.findTransactionObjects({addresses:["LRVDMZNKCWEZGDRQCPHVFSJEHPJSHYFXDNODIKLQHCQWNDLIYISGNVCAGTXE9S9SSAIDVIROEYTEACVU9XVSXNL9TD"]},(err,txs) => {
+            iota.api.findTransactionObjects({addresses:["OKRJYZKMVBMBIZMWFLDGLAWG9OJFLFHACVFVVCJ9SJCZDMECEKGEOSRHXUSCLTUBPNYQHPCUOJRBVIRN9VJDXFUADB"]},(err,txs) => {
                 console.log(err);
                 
                 var filtered = _.orderBy(txs, ["timestamp"], ['desc']);
@@ -128,7 +128,7 @@ function init(config){
 
     function getHistory(){
         return new Promise((resolve, reject) => {
-            request.get("https://api.thetangle.org/addresses/LRVDMZNKCWEZGDRQCPHVFSJEHPJSHYFXDNODIKLQHCQWNDLIYISGNVCAGTXE9S9SSAIDVIROEYTEACVU9XVSXNL9TD",(a,b,c) => {
+            request.get("https://api.thetangle.org/addresses/OKRJYZKMVBMBIZMWFLDGLAWG9OJFLFHACVFVVCJ9SJCZDMECEKGEOSRHXUSCLTUBPNYQHPCUOJRBVIRN9VJDXFUADB",(a,b,c) => {
                 if(!a){
                     var dat;
                     try {
