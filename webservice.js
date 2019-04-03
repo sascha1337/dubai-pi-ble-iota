@@ -35,7 +35,8 @@ function init(config){
         ctx => header("Access-Control-Allow-Origin", "*"),
         ctx => header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"),
         ctx => ctx.method.toLowerCase() === 'options' ? 200 : false,
-        ctx => {ctx.server.timeout = 800000}
+        ctx => {ctx.server.timeout = 800000},
+        ctx => {ctx.server.setTimeout(800000)},
     ];
       
     server(security, cors, [
@@ -58,7 +59,11 @@ function init(config){
         error(ctx => status(500).send(ctx.error.message))
     ]);
 
-    async function getHistoryJson(){
+    async function getHistoryJson(ctx){
+
+        ctx.req.setTimeout(800000);
+        ctx.res.setTimeout(800000);
+    
         var mox = await newHistory();
         return json({transactions:mox});
     }
